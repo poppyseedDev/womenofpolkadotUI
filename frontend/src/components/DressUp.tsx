@@ -18,12 +18,6 @@ const DressUp: React.FC = () => {
   const pants = [
     "https://s-media-cache-ak0.pinimg.com/originals/b3/c2/4d/b3c24d75d647564cdaa1d85f854587ba.png",
     "https://s-media-cache-ak0.pinimg.com/originals/a5/3a/56/a53a562de60d53e341289584e585f776.png",
-    "https://s-media-cache-ak0.pinimg.com/originals/2b/26/3b/2b263b07bcdd3d2fafab6ec03402e255.png",
-    "https://s-media-cache-ak0.pinimg.com/originals/dd/a6/d7/dda6d7944174edbd743d92360e2ef8f5.png",
-    "https://s-media-cache-ak0.pinimg.com/originals/94/c7/15/94c715a60995c215a74a2492a5bea344.png",
-    "https://s-media-cache-ak0.pinimg.com/originals/da/1a/16/da1a1609695435ddc106d4f8989f1535.png",
-    "https://s-media-cache-ak0.pinimg.com/originals/c3/78/78/c3787895d353d3b4d8534855ae0b1d83.png"
-    // ... add more pant URLs as needed ...
   ];
 
   const nextShirt = () => {
