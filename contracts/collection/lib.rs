@@ -202,7 +202,6 @@ mod tests {
         set_sender(accounts.bob);
         let mut collection = init();
         let num_of_mints: u64 = 5;
-        dbg!(collection.set_max_mint_amount(num_of_mints).is_ok());
 
         assert!(collection.set_max_mint_amount(num_of_mints).is_ok());
 
