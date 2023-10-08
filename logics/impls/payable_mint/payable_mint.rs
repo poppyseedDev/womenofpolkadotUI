@@ -4,7 +4,6 @@ pub use crate::traits::payable_mint::PayableMint;
 
 use ink::prelude::string::{String as PreludeString, ToString};
 use openbrush::contracts::psp34::extensions::metadata;
-use openbrush::traits::DefaultEnv;
 use openbrush::{
     contracts::{ownable::*, psp34::*},
     modifiers,
@@ -41,7 +40,7 @@ pub trait PayableMintImpl:
 
     /// Withdraws funds to contract owner
     #[ink(message)]
-    #[openbrush::modifiers(only_owner)]
+    #[modifiers(only_owner)]
     fn withdraw(&mut self) -> Result<(), PSP34Error> {
         let balance = Self::env().balance();
         let current_balance = balance
@@ -64,6 +63,15 @@ pub trait PayableMintImpl:
         Ok(())
     }
 
+    /// Set max number of tokens which could be minted per call
+    #[ink(message)]
+    #[modifiers(only_owner)]
+    fn set_max_mint_amount(&mut self, max_amount: u64) -> Result<(), PSP34Error> {
+        self.data::<Data>().max_amount = max_amount;
+
+        Ok(())
+    }
+
     /// Get URI from token ID
     #[ink(message)]
     fn token_uri(&self, token_id: u64) -> Result<String, PSP34Error> {
@@ -75,6 +83,24 @@ pub trait PayableMintImpl:
         );
         let token_uri = base_uri.unwrap() + &token_id.to_string() + &String::from(".json");
         Ok(token_uri)
+    }
+
+    /// Get max supply of tokens
+    #[ink(message)]
+    fn max_supply(&self) -> u64 {
+        self.data::<Data>().max_supply
+    }
+
+    /// Get token price
+    #[ink(message)]
+    fn price(&self) -> Balance {
+        self.data::<Data>().price_per_mint
+    }
+
+    /// Get max number of tokens which could be minted per call
+    #[ink(message)]
+    fn get_max_mint_amount(&mut self) -> u64 {
+        self.data::<Data>().max_amount
     }
 }
 
@@ -93,6 +119,9 @@ pub trait Internal: Storage<Data> + psp34::Internal {
     fn check_amount(&self, mint_amount: u64) -> Result<(), PSP34Error> {
         if mint_amount == 0 {
             return Err(PSP34Error::Custom(String::from("CannotMintZeroTokens")));
+        }
+        if mint_amount > self.data::<Data>().max_amount {
+            return Err(PSP34Error::Custom(String::from("TooManyTokensToMint")));
         }
         if let Some(amount) = self.data::<Data>().last_token_id.checked_add(mint_amount) {
             if amount <= self.data::<Data>().max_supply {

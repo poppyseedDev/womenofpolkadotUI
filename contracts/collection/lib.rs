@@ -1,14 +1,7 @@
 #![cfg_attr(not(feature = "std"), no_std, no_main)]
 #![feature(min_specialization)]
 
-#[openbrush::implementation(
-    Ownable,
-    PSP34,
-    PSP34Burnable,
-    PSP34Mintable,
-    PSP34Enumerable,
-    PSP34Metadata
-)]
+#[openbrush::implementation(Ownable, PSP34, PSP34Burnable, PSP34Enumerable, PSP34Metadata)]
 #[openbrush::contract]
 pub mod collection {
     use openbrush::{
@@ -16,6 +9,9 @@ pub mod collection {
         modifiers,
         traits::{Storage, String},
     };
+    use payable_mint_pkg::traits::payable_mint::*;
+
+    use ink::codegen::{EmitEvent, Env};
     use payable_mint_pkg::impls::payable_mint;
     use payable_mint_pkg::impls::payable_mint::types;
 
@@ -24,7 +20,6 @@ pub mod collection {
     pub struct Collection {
         #[storage_field]
         psp34: psp34::Data,
-        next_id: u8,
         #[storage_field]
         ownable: ownable::Data,
         #[storage_field]
@@ -33,6 +28,44 @@ pub mod collection {
         enumerable: enumerable::Data,
         #[storage_field]
         payable_mint: types::Data,
+    }
+
+    /// Event emitted when a token transfer occurs.
+    #[ink(event)]
+    pub struct Transfer {
+        #[ink(topic)]
+        from: Option<AccountId>,
+        #[ink(topic)]
+        to: Option<AccountId>,
+        #[ink(topic)]
+        id: Id,
+    }
+
+    /// Event emitted when a token approve occurs.
+    #[ink(event)]
+    pub struct Approval {
+        #[ink(topic)]
+        from: AccountId,
+        #[ink(topic)]
+        to: AccountId,
+        #[ink(topic)]
+        id: Option<Id>,
+        approved: bool,
+    }
+
+    #[overrider(psp34::Internal)]
+    fn _emit_transfer_event(&self, from: Option<AccountId>, to: Option<AccountId>, id: Id) {
+        self.env().emit_event(Transfer { from, to, id });
+    }
+
+    #[overrider(psp34::Internal)]
+    fn _emit_approval_event(&self, from: AccountId, to: AccountId, id: Option<Id>, approved: bool) {
+        self.env().emit_event(Approval {
+            from,
+            to,
+            id,
+            approved,
+        });
     }
 
     impl payable_mint::payable_mint::PayableMintImpl for Collection {}
@@ -72,15 +105,8 @@ pub mod collection {
             instance.payable_mint.max_supply = max_supply;
             instance.payable_mint.price_per_mint = price_per_mint;
             instance.payable_mint.last_token_id = 0;
+            instance.payable_mint.max_amount = 1;
             instance
-        }
-
-        #[ink(message)]
-        #[modifiers(only_owner)]
-        pub fn mint_token(&mut self) -> Result<(), PSP34Error> {
-            psp34::Internal::_mint_to(self, Self::env().caller(), Id::U8(self.next_id))?;
-            self.next_id += 1;
-            Ok(())
         }
     }
 }
@@ -97,14 +123,17 @@ mod tests {
         modifiers,
         traits::{AccountId, Balance, Storage, String},
     };
-    use payable_mint_pkg::impls::payable_mint::*;
+    //use payable_mint_pkg::impls::payable_mint;
+    use payable_mint_pkg::impls::payable_mint::payable_mint::PayableMintImpl;
+    use payable_mint_pkg::impls::payable_mint::types;
 
     const PRICE: Balance = 100_000_000_000_000_000;
+    const BASE_URI: &str = "ipfs://myIpfsUri/";
+    const MAX_SUPPLY: u64 = 10;
+
     fn init() -> Collection {
-        const BASE_URI: &str = "ipfs://myIpfsUri/";
-        const MAX_SUPPLY: u64 = 10;
         Collection::new(
-            String::from("Collection"),
+            String::from("Women from Polkadot Collection"),
             String::from("WMN"),
             String::from(BASE_URI),
             MAX_SUPPLY,
@@ -113,18 +142,74 @@ mod tests {
     }
 
     #[ink::test]
-    fn mint_multiple_works() {
+    fn init_works() {
+        let collection = init();
+        let collection_id = PSP34Impl::collection_id(&collection);
+        assert_eq!(
+            metadata::PSP34MetadataImpl::get_attribute(
+                &collection,
+                collection_id.clone(),
+                String::from("name")
+            ),
+            Some(String::from("Women from Polkadot Collection"))
+        );
+        assert_eq!(
+            metadata::PSP34MetadataImpl::get_attribute(
+                &collection,
+                collection_id.clone(),
+                String::from("symbol")
+            ),
+            Some(String::from("WMN"))
+        );
+        assert_eq!(
+            metadata::PSP34MetadataImpl::get_attribute(
+                &collection,
+                collection_id,
+                String::from("baseUri")
+            ),
+            Some(String::from(BASE_URI))
+        );
+        assert_eq!(collection.max_supply(), MAX_SUPPLY);
+        assert_eq!(collection.price(), PRICE);
+    }
+
+    #[ink::test]
+    fn mint_single_works() {
         let mut collection = init();
         let accounts = test::default_accounts::<ink::env::DefaultEnvironment>();
         set_sender(accounts.bob);
-        let num_of_mints: u64 = 5;
 
         assert_eq!(PSP34Impl::total_supply(&collection), 0);
-        test::set_value_transferred::<ink::env::DefaultEnvironment>(PRICE * num_of_mints as u128);
-        assert!(
-            payable_mint::PayableMintImpl::mint(&mut collection, accounts.bob, num_of_mints)
-                .is_ok()
+        test::set_value_transferred::<ink::env::DefaultEnvironment>(PRICE);
+        assert!(collection.mint(accounts.bob, 1).is_ok());
+        assert_eq!(PSP34Impl::total_supply(&collection), 1);
+        assert_eq!(
+            PSP34Impl::owner_of(&collection, Id::U64(1)),
+            Some(accounts.bob)
         );
+        assert_eq!(PSP34Impl::balance_of(&collection, accounts.bob), 1);
+
+        assert_eq!(
+            PSP34EnumerableImpl::owners_token_by_index(&collection, accounts.bob, 0),
+            Ok(Id::U64(1))
+        );
+        assert_eq!(1, ink::env::test::recorded_events().count());
+    }
+
+    #[ink::test]
+    fn mint_multiple_works() {
+        let accounts = test::default_accounts::<ink::env::DefaultEnvironment>();
+        set_sender(accounts.bob);
+        let mut collection = init();
+        let num_of_mints: u64 = 5;
+        dbg!(collection.set_max_mint_amount(num_of_mints).is_ok());
+
+        assert!(collection.set_max_mint_amount(num_of_mints).is_ok());
+
+        assert_eq!(PSP34Impl::total_supply(&collection), 0);
+
+        test::set_value_transferred::<ink::env::DefaultEnvironment>(PRICE * num_of_mints as u128);
+        assert!(PayableMintImpl::mint(&mut collection, accounts.bob, num_of_mints).is_ok());
         assert_eq!(PSP34Impl::total_supply(&collection), num_of_mints as u128);
         assert_eq!(PSP34Impl::balance_of(&collection, accounts.bob), 5);
         assert_eq!(
@@ -151,6 +236,7 @@ mod tests {
             PSP34EnumerableImpl::owners_token_by_index(&collection, accounts.bob, 5),
             Err(TokenNotExists)
         );
+        assert_eq!(5, ink::env::test::recorded_events().count());
     }
 
     fn set_sender(sender: AccountId) {

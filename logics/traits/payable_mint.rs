@@ -21,4 +21,10 @@ pub trait PayableMint {
     fn max_supply(&mut self) -> u64;
     #[ink(message)]
     fn price(&mut self) -> Balance;
+    /// Set max number of tokens which could be minted per call
+    #[ink(message)]
+    fn set_max_mint_amount(&mut self, max_amount: u64) -> Result<(), PSP34Error>;
+    /// Get max number of tokens which could be minted per call
+    #[ink(message)]
+    fn get_max_mint_amount(&mut self) -> u64;
 }
