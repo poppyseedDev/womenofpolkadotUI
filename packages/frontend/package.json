@@ -16,7 +16,6 @@
   "dependencies": {
     "@azns/resolver-core": "^1.6.0",
     "@azns/resolver-react": "^1.6.0",
-    "@chakra-ui/react": "^2.8.1",
     "@inkathon/contracts": "workspace:*",
     "@polkadot/api": "^10.9.1",
     "@polkadot/api-contract": "^10.9.1",

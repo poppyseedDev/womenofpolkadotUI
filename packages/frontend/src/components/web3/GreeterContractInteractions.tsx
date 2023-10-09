@@ -1,4 +1,3 @@
-import { Button, Card, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react'
 import { ContractIds } from '@deployments/deployments'
 import {
   contractQuery,
@@ -73,36 +72,39 @@ export const GreeterContractInteractions: FC = () => {
         <h2 className="text-center font-mono text-gray-400">Greeter Smart Contract</h2>
 
         {/* Fetched Greeting */}
-        <Card variant="outline" p={4} bgColor="whiteAlpha.100">
-          <FormControl>
-            <FormLabel>Fetched Greeting</FormLabel>
-            <Input
-              placeholder={fetchIsLoading || !contract ? 'Loading…' : greeterMessage}
-              disabled={true}
-            />
-          </FormControl>
-        </Card>
+        <div className="p-4 border border-gray-300 rounded bg-white dark:bg-gray-800">
+          <div className="mb-2 font-bold">Fetched Greeting</div>
+          <input
+            type="text"
+            placeholder={fetchIsLoading || !contract ? 'Loading…' : greeterMessage}
+            disabled
+            className="w-full p-2 border rounded-md"
+          />
+        </div>
 
         {/* Update Greeting */}
-        <Card variant="outline" p={4} bgColor="whiteAlpha.100">
+        <div className="p-4 border border-gray-300 rounded bg-white dark:bg-gray-800">
           <form onSubmit={handleSubmit(updateGreeting)}>
-            <Stack direction="row" spacing={2} align="end">
-              <FormControl>
-                <FormLabel>Update Greeting</FormLabel>
-                <Input disabled={updateIsLoading} {...register('newMessage')} />
-              </FormControl>
-              <Button
+            <div className="flex items-end space-x-2">
+              <div className="flex-grow">
+                <label className="block mb-1 font-bold">Update Greeting</label>
+                <input
+                  type="text"
+                  disabled={updateIsLoading}
+                  {...register('newMessage')}
+                  className="w-full p-2 border rounded-md"
+                />
+              </div>
+              <button
                 type="submit"
-                mt={4}
-                colorScheme="purple"
-                isLoading={updateIsLoading}
+                className={`px-4 py-2 bg-purple-600 text-white rounded ${updateIsLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-purple-700'}`}
                 disabled={updateIsLoading}
               >
                 Submit
-              </Button>
-            </Stack>
+              </button>
+            </div>
           </form>
-        </Card>
+        </div>
 
         {/* Contract Address */}
         <p className="text-center font-mono text-xs text-gray-600">

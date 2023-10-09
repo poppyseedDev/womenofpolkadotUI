@@ -1,4 +1,3 @@
-import { Card, Spinner } from '@chakra-ui/react'
 import { useInkathon } from '@scio-labs/use-inkathon'
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
@@ -35,7 +34,7 @@ export const ChainInfo: FC = () => {
   if (!api)
     return (
       <div className="mt-8 mb-4 flex flex-col items-center justify-center space-y-3 text-center font-mono text-sm text-gray-400 sm:(flex-row space-x-3 space-y-0)">
-        <Spinner size="sm" />
+        <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-7 w-7"></div>
         <div>
           Connecting to {activeChain?.name} ({activeChain?.rpcUrls?.[0]})
         </div>

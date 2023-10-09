@@ -1,7 +1,6 @@
 'use client';
 
 import { HomePageTitle } from '@components/home/HomePageTitle'
-import { HomeTopBar } from '@components/home/HomeTopBar'
 import { ChainInfo } from '@components/web3/ChainInfo'
 import { ConnectButton } from '@components/web3/ConnectButton'
 import { GreeterContractInteractions } from '@components/web3/GreeterContractInteractions'
@@ -21,10 +20,7 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      {/* Top Bar */}
-      <HomeTopBar />
-
-      <div className="mt-20 mb-10 px-5">
+      <div className="mt-20 px-5">
         {/* Title */}
         <HomePageTitle />
 
@@ -38,8 +34,8 @@ const HomePage: NextPage = () => {
           {/* Greeter Read/Write Contract Interactions */}
           <GreeterContractInteractions />
         </div>
+        <DressUp />
       </div>
-      <DressUp />
     </>
   )
 }
