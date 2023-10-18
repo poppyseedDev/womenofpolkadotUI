@@ -5,7 +5,7 @@ import { ChainInfo } from '@components/web3/ChainInfo'
 import { ConnectButton } from '@components/web3/ConnectButton'
 import { GreeterContractInteractions } from '@components/web3/GreeterContractInteractions'
 import { useInkathon } from '@scio-labs/use-inkathon'
-import DressUp from 'components/DressUp';
+import DressUp from '@/components/dressup/DressUp';
 import type { NextPage } from 'next'
 import { useEffect } from 'react'
 import { toast } from 'react-hot-toast'
@@ -34,6 +34,8 @@ const HomePage: NextPage = () => {
           {/* Greeter Read/Write Contract Interactions */}
           <GreeterContractInteractions />
         </div>
+
+        {/* Dress Up */}
         <DressUp />
       </div>
     </>
