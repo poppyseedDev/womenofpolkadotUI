@@ -1,72 +1,57 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import inkathonLogo from 'public/brand/inkathon-logo.png'
-import githubIcon from 'public/icons/github-button.svg'
-import sponsorIcon from 'public/icons/sponsor-button.svg'
-import telegramIcon from 'public/icons/telegram-button.svg'
-import vercelIcon from 'public/icons/vercel-button.svg'
+import womenofpolkadotlogo from 'public/brand/womenofpolkadotlogo.png'
 import { FC } from 'react'
 
 
 export const HomePageTitle: FC = () => {
-  const title = 'ink!athon'
-  const desc = 'Full-Stack DApp Boilerplate for Substrate and ink! Smart Contracts'
-  const githubHref = 'https://github.com/scio-labs/inkathon'
-  const deployHref = 'https://github.com/scio-labs/inkathon#deployment'
-  const sponsorHref = 'mailto:hello@scio.xyz'
-  const telegramHref = 'https://t.me/inkathon'
+  const desc = 'Mint your own Women of Polkadot NFTs! 🎉'
+  const twitterHref = 'https://twitter.com/womenofpolkadot'
 
   return (
     <>
       <div className="flex flex-col items-center text-center font-mono">
         {/* Logo & Title */}
         <Link
-          href={githubHref}
+          href={twitterHref}
           target="_blank"
-          className="group flex cursor-pointer items-center gap-4 rounded-3xl py-1.5 px-3.5 transition-all hover:bg-gray-900"
+          className="group flex cursor-pointer items-center gap-4 rounded-3xl py-1.5 px-3.5 transition-all"
         >
-          <Image src={inkathonLogo} priority width={60} alt="ink!athon Logo" />
-          <h1 className="font-black text-[2.5rem]">{title}</h1>
+          <Image src={womenofpolkadotlogo} priority height={50} alt="ink!athon Logo" />
         </Link>
+
+        <p className="mt-4 text-gray-400">{desc}</p>
 
         {/* Tagline & Links */}
         <p className="mt-2 text-gray-600 text-sm">
           By{' '}
           <a
-            href="https://zoma.dev"
+            href="https://twitter.com/poppyseedDev"
             target="_blank"
-            className="font-semibold text-gray-500 hover:text-gray-100"
+            className="font-semibold text-gray-500 hover:text-gray-400"
           >
-            Dennis Zoma
-          </a>{' '}
-          &{' '}
+            Aurora Poppyseed
+          </a>
+          {' '}&{' '}
           <a
-            href="https://scio.xyz"
+            href="https://twitter.com/Just_Luuuu"
             target="_blank"
-            className="font-semibold text-gray-500 hover:text-gray-100"
+            className="font-semibold text-gray-500 hover:text-gray-400"
           >
-            Scio Labs
+            Luuu
+          </a>
+          {' '}&{' '}
+          <a
+            href="https://twitter.com/ppt1993"
+            target="_blank"
+            className="font-semibold text-gray-500 hover:text-gray-400"
+          >
+            Pierina Ponce
           </a>
         </p>
-        <p className="mt-4 mb-6 text-gray-400">{desc}</p>
-
-        {/* Github & Vercel Buttons */}
-        <div className="flex space-x-2">
-          <Link href={githubHref} target="_blank">
-            <Image src={githubIcon} priority height={32} alt="Github Repository" />
-          </Link>
-          <Link href={deployHref} target="_blank">
-            <Image src={vercelIcon} priority height={32} alt="Deploy with Vercel" />
-          </Link>
-          <Link href={telegramHref} target="_blank">
-            <Image src={telegramIcon} priority height={32} alt="Telegram Group" />
-          </Link>
-          <Link href={sponsorHref} target="_blank">
-            <Image src={sponsorIcon} priority height={32} alt="Sponsor the Project" />
-          </Link>
-        </div>
-
-        <div className="my-14 w-14 bg-gray-800 h-[2px]" />
+        <p className='text-xs p-2'>
+          Note: These NFTs are only eligible to be minted by Women of Polkadot. Before being eligible to mint your NFT, you must first connect your wallet and wait for approval.
+        </p>
       </div>
     </>
   )
