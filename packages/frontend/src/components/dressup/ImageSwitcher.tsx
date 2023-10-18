@@ -34,7 +34,7 @@ const ImageSwitcher: React.FC<ImageSwitcherProps> = ({ name, imagePaths, indices
 
   return (
     <>
-      <li className='p-3 flex flex-row'>
+      <li className='p-1 flex flex-row'>
           <div className="px-5 mx-1 py-2 bg-gray-500 text-white uppercase border border-gray-800">
             <span className="font-bold ">{name}</span>
           </div>

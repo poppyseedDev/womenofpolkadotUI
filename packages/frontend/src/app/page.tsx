@@ -24,7 +24,7 @@ const HomePage: NextPage = () => {
         {/* Title */}
         <HomePageTitle />
 
-        <div className="flex flex-col items-center justify-center font-mono">
+        <div className="flex flex-col items-center p-5 justify-center font-mono">
           {/* Connect Wallet Button */}
           <ConnectButton />
         </div>

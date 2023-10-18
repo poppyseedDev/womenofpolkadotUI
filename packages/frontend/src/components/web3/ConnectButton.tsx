@@ -54,15 +54,14 @@ return (
     // Connect Button + Modal
     <div className="relative">
       <button
-        className="flex items-center justify-between rounded-lg bg-gray-200 dark:bg-gray-800 px-6 py-3 font-bold text-black dark:text-white transition duration-300 hover:bg-gray-300"
+        className="flex items-center justify-between border border-black  bg-gray-200 dark:bg-gray-800 px-6 py-3 font-bold text-black dark:text-white transition duration-300 hover:bg-gray-300"
         onClick={() => setOpenConnect(!openConnect)}
       >
         <span>Connect Wallet</span>
-        <FiChevronDown size={22} />
       </button>
 
       <WalletModal isOpen={openConnect} onClose={() => setOpenConnect(false)}>
-        <ul className="rounded-lg border border-gray-200 bg-white dark:bg-gray-700 divide-y divide-gray-200">
+        <ul className="border border-gray-200 bg-white dark:bg-gray-700 divide-y divide-gray-200">
           {/* Installed Wallets */}
           {!isSSR &&
             !activeAccount &&
@@ -107,7 +106,7 @@ return (
       <div className="flex items-center space-x-4">
         {/* Account Name, Address, and AZNS-Domain (if assigned) */}
         <button
-          className="flex flex-col items-start rounded-xl p-4 bg-white dark:bg-gray-900 shadow hover:bg-gray-100"
+          className="flex flex-col items-start p-4 border border-black  bg-white dark:bg-gray-900 shadow hover:bg-gray-100"
           onClick={() => setOpenChooseAccount(true)} 
           >
           <div className="space-y-1">
@@ -168,7 +167,7 @@ return (
           
             {/* Account Balance */}
             {balanceFormatted !== undefined && (
-              <div className="rounded-2x px-4 py-2 font-bold text-gray-700 hover:bg-gray-200">
+              <div className="px-4 py-2 font-bold text-gray-700 hover:bg-gray-200">
                 {balanceFormatted}
               </div>
             )}

@@ -17,7 +17,7 @@ const ImagePaths: ImagePathType[] = [
   { name: 'clothes', paths: generatePaths('7-clothes', 'Clo', 32) },
   { name: 'hat', paths: generatePaths('8-hat', 'hat', 12) },
   { name: 'accessories', paths: generatePaths('9-accessories', 'acc', 9) },
-  { name: 'extra', paths: generatePaths('10-extra', 'ext', 6) },
+  { name: 'extra', paths: generatePaths('10-extra', 'ext', 7) },
 ];
 
 const DressUp: React.FC = () => {
@@ -37,14 +37,36 @@ const DressUp: React.FC = () => {
   };
 
   return (
-    <div className='className="flex flex-col items-center justify-center font-mono'>
-      <div className="min-h-screen grid grid-cols-2 font-sans">
-        <div>
-          <ul className="flex flex-col p-4">
-            <li>
-            <button className="p-4 mx- my-1 uppercase bg-gray-600 text-white font-extrabold hover:bg-fuchsia-300 border border-cyan-500"
-              onClick={RandomiseImg}>✨ Radomise ✨</button>
-            </li>
+    <>
+    <div className='flex flex-col justify-center items-center'>
+      <button 
+        className="p-4 mb-4 uppercase bg-gray-600 text-white font-extrabold hover:bg-fuchsia-300 border border-cyan-500"
+        onClick={RandomiseImg}>
+          ✨ Randomise ✨
+      </button>
+
+    <div className='grid grid-cols-1 lg:grid-cols-2'>
+    <div className="flex text-center items-center justify-center font-mono">
+      <div className="relative w-full max-w-xl mx-auto" style={{height: '500px'}}>
+        {ImagePaths.map((img, idx) => (
+          <Image
+            key={idx}
+            alt={img.name}
+            src={img.paths[indices[img.name]]}
+            className="absolute top-0 left-0"
+            width={500}
+            height={500}
+          />
+        ))}
+      </div>
+    </div>
+
+    {/* Items under the image */}
+    <div className="flex flex-col text-center items-center justify-start font-mon">
+      
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 w-full">
+        <div className="">
+          <div className="flex flex-col gap-3 p-4">
             {ImagePaths.map((img, idx) => img.name !== 'base' && 
               <div key={idx}>
                 <ImageSwitcher 
@@ -55,23 +77,16 @@ const DressUp: React.FC = () => {
                 />
               </div>
             )}
-          </ul>
+          </div>
         </div>
-        <div>
-          {ImagePaths.map((img, idx) => (
-            <div key={idx}>
-              <Image
-                alt={img.name}
-                src={img.paths[indices[img.name]]}
-                className="absolute left-1/4 z-10"
-                width={500}
-                height={500}
-              />
-            </div>
-          ))}
-        </div>
+        
       </div>
     </div>
+    </div >
+    </div>
+
+    </>
+
   );
 }
 
