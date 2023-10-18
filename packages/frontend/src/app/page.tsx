@@ -24,9 +24,15 @@ const HomePage: NextPage = () => {
         {/* Title */}
         <HomePageTitle />
 
+        <div className="mx-auto items-start justify-center">
         {/* Connect Wallet Button */}
         <ConnectButton />
 
+        {/* Dress Up */}
+        <DressUp />
+        </div>
+        
+        {/* Greeter Contract Interactions */}
         <div className="mt-10 flex w-full flex-wrap items-start justify-center gap-4">
           {/* Chain Metadata Information */}
           <ChainInfo />
@@ -35,8 +41,6 @@ const HomePage: NextPage = () => {
           <GreeterContractInteractions />
         </div>
 
-        {/* Dress Up */}
-        <DressUp />
       </div>
     </>
   )
