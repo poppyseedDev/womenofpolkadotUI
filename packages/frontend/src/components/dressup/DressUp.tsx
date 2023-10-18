@@ -1,26 +1,10 @@
 import Image from 'next/image';
 import { useState } from 'react';
+import { IndicesType, ImagePathType } from './types';
+import ImageSwitcher from './ImageSwitcher';
 
 const generatePaths = (categoryName: string, itemName: string, count: number) => {
   return Array(count).fill(0).map((_, i) => `/images/nfts/${categoryName}/${itemName}${i + 1}.png`);
-};
-
-type IndicesType = {
-  background: number;
-  skin: number;
-  base: number;
-  eyes: number;
-  lips: number;
-  hair: number;
-  clothes: number;
-  hat: number;
-  accessories: number;
-  extra: number;
-};
-
-type ImagePathType = {
-  name: keyof IndicesType;
-  paths: string[];
 };
 
 const ImagePaths: ImagePathType[] = [
@@ -39,74 +23,55 @@ const ImagePaths: ImagePathType[] = [
 const DressUp: React.FC = () => {
   const [indices, setIndices] = useState<IndicesType>({ background: 0, skin: 0, base: 0, eyes: 0, lips: 0, hair: 0, clothes: 0, hat: 0, accessories: 0, extra: 0 });
 
-  const nextImage = (type: keyof IndicesType) => {
+  const RandomiseImg = () => {
+    const newIndices: Partial<IndicesType> = {};
+  
+    ImagePaths.forEach(img => {
+      newIndices[img.name] = Math.floor(Math.random() * img.paths.length);
+    });
+  
     setIndices(prevIndices => ({
       ...prevIndices,
-      [type]: (prevIndices[type] + 1) % (ImagePaths.find(i => i.name === type)?.paths.length || 0)
+      ...newIndices
     }));
   };
 
-  const previousImage = (type: keyof IndicesType) => {
-    setIndices(prevIndices => {
-      const length = ImagePaths.find(i => i.name === type)?.paths.length || 0;
-      return {
-        ...prevIndices,
-        [type]: (prevIndices[type] - 1 + length) % length
-      }
-    });
-  };
-
-  const RandomiseImg = () => {
-    ImagePaths.forEach(img => nextImage(img.name));
-  };
-
-  const switchButton = (name: keyof IndicesType, onClick: () => void, text: string) => (
-    <button className="px-3 py-2 mx-1 bg-gray-200 hover:bg-gray-300 border border-gray-800" onClick={onClick}>
-      {text}
-    </button>
-  );
-
-  const switchFunctionality = (name: keyof IndicesType) => (
-    <div key={name}>
-      <li className='p-3'>
-      <span className="font-bold">{name}: </span>
-        {switchButton(name, () => previousImage(name), `↑`)}
-        {switchButton(name, () => nextImage(name), `↓`)}
-      <span className="ml-3">{indices[name] + 1}</span>
-      </li>
-    </div>
-  );
-
   return (
-    <>
+    <div className='className="flex flex-col items-center justify-center font-mono'>
       <div className="min-h-screen grid grid-cols-2 font-sans">
         <div>
           <ul className="flex flex-col p-4">
             <li>
-            <button className="p-4 mx-2 my-1 bg-fuchsia-200 hover:bg-fuchsia-300 border border-cyan-500 rounded-2xl"
-              onClick={RandomiseImg}>Radom</button>
+            <button className="p-4 mx- my-1 uppercase bg-gray-600 text-white font-extrabold hover:bg-fuchsia-300 border border-cyan-500"
+              onClick={RandomiseImg}>✨ Radomise ✨</button>
             </li>
-            {ImagePaths.map(img => img.name !== 'base' && 
-                switchFunctionality(img.name)
-              )
-            }
+            {ImagePaths.map((img, idx) => img.name !== 'base' && 
+              <div key={idx}>
+                <ImageSwitcher 
+                    name={img.name}
+                    imagePaths={ImagePaths}
+                    indices={indices} 
+                    setIndices={setIndices} 
+                />
+              </div>
+            )}
           </ul>
         </div>
         <div>
           {ImagePaths.map((img, idx) => (
             <div key={idx}>
-            <Image
-              alt={img.name}
-              src={img.paths[indices[img.name]]}
-              className="absolute left-1/4 z-10"
-              width={500}
-              height={500}
-            />
+              <Image
+                alt={img.name}
+                src={img.paths[indices[img.name]]}
+                className="absolute left-1/4 z-10"
+                width={500}
+                height={500}
+              />
             </div>
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

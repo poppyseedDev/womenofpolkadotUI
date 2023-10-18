@@ -24,13 +24,14 @@ const HomePage: NextPage = () => {
         {/* Title */}
         <HomePageTitle />
 
-        <div className="mx-auto items-start justify-center">
-        {/* Connect Wallet Button */}
-        <ConnectButton />
-
-        {/* Dress Up */}
-        <DressUp />
+        <div className="flex flex-col items-center justify-center font-mono">
+          {/* Connect Wallet Button */}
+          <ConnectButton />
         </div>
+        
+          {/* Dress Up */}
+          <DressUp />
+        
         
         {/* Greeter Contract Interactions */}
         <div className="mt-10 flex w-full flex-wrap items-start justify-center gap-4">
