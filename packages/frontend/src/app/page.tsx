@@ -5,7 +5,7 @@ import { ChainInfo } from '@components/web3/ChainInfo'
 import { ConnectButton } from '@components/web3/ConnectButton'
 import { GreeterContractInteractions } from '@components/web3/GreeterContractInteractions'
 import { useInkathon } from '@scio-labs/use-inkathon'
-import DressUp from 'components/DressUp';
+import DressUp from '@/components/dressup/DressUp';
 import type { NextPage } from 'next'
 import { useEffect } from 'react'
 import { toast } from 'react-hot-toast'
@@ -24,9 +24,16 @@ const HomePage: NextPage = () => {
         {/* Title */}
         <HomePageTitle />
 
-        {/* Connect Wallet Button */}
-        <ConnectButton />
-
+        <div className="flex flex-col items-center p-5 justify-center font-mono">
+          {/* Connect Wallet Button */}
+          <ConnectButton />
+        </div>
+        
+          {/* Dress Up */}
+          <DressUp />
+        
+        
+        {/* Greeter Contract Interactions */}
         <div className="mt-10 flex w-full flex-wrap items-start justify-center gap-4">
           {/* Chain Metadata Information */}
           <ChainInfo />
@@ -34,7 +41,7 @@ const HomePage: NextPage = () => {
           {/* Greeter Read/Write Contract Interactions */}
           <GreeterContractInteractions />
         </div>
-        <DressUp />
+
       </div>
     </>
   )
