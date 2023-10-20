@@ -164,7 +164,7 @@ pub mod collection {
         /// Initializes a new `Collection` instance with test data.
         fn init() -> Collection {
             Collection::new(
-                String::from("Women of Polkadot Collection"),
+                String::from("Women of Polkadot"),
                 String::from("WMN"),
                 String::from(BASE_URI),
                 MAX_SUPPLY,
@@ -183,7 +183,7 @@ pub mod collection {
                     collection_id.clone(),
                     String::from("name")
                 ),
-                Some(String::from("Women of Polkadot Collection"))
+                Some(String::from("Women of Polkadot"))
             );
             assert_eq!(
                 metadata::PSP34MetadataImpl::get_attribute(
