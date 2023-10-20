@@ -1,8 +1,8 @@
 use crate::impls::payable_mint::types::Data;
-use crate::traits::payable_mint;
-pub use crate::traits::payable_mint::PayableMint;
+//use crate::traits::payable_mint;
+//pub use crate::traits::payable_mint::PayableMint;
 
-use ink::prelude::string::{String as PreludeString, ToString};
+use ink::prelude::string::{ToString};
 use openbrush::contracts::psp34::extensions::metadata;
 use openbrush::{
     contracts::{ownable::*, psp34::*},

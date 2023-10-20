@@ -1,6 +1,6 @@
 use ink::prelude::string::String as PreludeString;
 use openbrush::{
-    contracts::{psp34::extensions::enumerable::*, psp34::PSP34Error},
+    contracts::{psp34::PSP34Error},
     traits::{AccountId, Balance},
 };
 
