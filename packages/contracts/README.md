@@ -23,3 +23,13 @@ cargo install cargo-dylint dylint-link
 cargo install cargo-contract --force --locked
 ```
 Using `cargo-contract 3.2.0`
+
+
+
+**Deploying using `cargo-contract`**
+```bash
+cd collection
+cargo contract build --release
+cargo contract upload --suri //Alice
+cargo contract instantiate --suri //Alice --args "Women of Polkadot" "WMN" "ipfs://myIpfsUri/" 10 100_000
+```
