@@ -15,6 +15,7 @@ pub mod collection {
     use payable_mint_pkg::impls::payable_mint;
     use payable_mint_pkg::impls::payable_mint::types;
 
+    /// Collection struct serves as the main contract storage.
     #[ink(storage)]
     #[derive(Default, Storage)]
     pub struct Collection {
@@ -41,7 +42,7 @@ pub mod collection {
         id: Id,
     }
 
-    /// Event emitted when a token approve occurs.
+    /// Event emitted when a token is approved.
     #[ink(event)]
     pub struct Approval {
         #[ink(topic)]
@@ -53,11 +54,13 @@ pub mod collection {
         approved: bool,
     }
 
+    /// Helper function to emit a Transfer event.
     #[overrider(psp34::Internal)]
     fn _emit_transfer_event(&self, from: Option<AccountId>, to: Option<AccountId>, id: Id) {
         self.env().emit_event(Transfer { from, to, id });
     }
 
+    /// Helper function to emit an Approval event.
     #[overrider(psp34::Internal)]
     fn _emit_approval_event(&self, from: AccountId, to: AccountId, id: Option<Id>, approved: bool) {
         self.env().emit_event(Approval {
@@ -68,10 +71,16 @@ pub mod collection {
         });
     }
 
+    // Implementation of the PayableMint trait for Collection.
     impl payable_mint::payable_mint::PayableMintImpl for Collection {}
+
+    /// Implementation of the Internal trait for Collection.
     impl payable_mint::payable_mint::Internal for Collection {}
 
     impl Collection {
+        /// Constructor function for Collection.
+        ///
+        /// Initializes a new Collection with the provided parameters.
         #[ink(constructor)]
         pub fn new(
             name: String,
@@ -80,32 +89,55 @@ pub mod collection {
             max_supply: u64,
             price_per_mint: Balance,
         ) -> Self {
+            // Initialize the default state for the Collection contract.
             let mut instance = Self::default();
+
+            // Fetch the account ID of the contract caller.
             let caller = Self::env().caller();
+
+            // Set the initial owner of the contract to be the caller.
             ownable::Internal::_init_with_owner(&mut instance, caller);
+
+            // Get the unique identifier for the collection.
             let collection_id = PSP34Impl::collection_id(&instance);
+
+            // Set the "name" attribute for the collection.
             metadata::Internal::_set_attribute(
                 &mut instance,
                 collection_id.clone(),
                 String::from("name"),
                 name,
             );
+
+            // Set the "symbol" attribute for the collection.
             metadata::Internal::_set_attribute(
                 &mut instance,
                 collection_id.clone(),
                 String::from("symbol"),
                 symbol,
             );
+
+            // Set the "baseUri" attribute for the collection.
             metadata::Internal::_set_attribute(
                 &mut instance,
                 collection_id,
                 String::from("baseUri"),
                 base_uri,
             );
+
+            // Set the max supply for the tokens.
             instance.payable_mint.max_supply = max_supply;
+            
+            // Set the price for minting a token.
             instance.payable_mint.price_per_mint = price_per_mint;
+
+            // Initialize the last token ID as 0.
             instance.payable_mint.last_token_id = 0;
+
+            // Set the maximum amount of tokens that can be minted at once.
             instance.payable_mint.max_amount = 1;
+    
+            // Return the initialized instance of the Collection contract.
             instance
         }
     }
