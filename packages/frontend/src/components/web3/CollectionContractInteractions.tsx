@@ -82,16 +82,14 @@ export const NFTMint: FC<MintAttributes> = ({
   return (
     <>
       <div className="flex grow flex-col space-y-4 max-w-[20rem]">
-        <h2 className="text-center font-mono text-gray-400">Mint NFT</h2>
-
         {/* Mint NFT Form */}
-        <div className="p-4 border border-gray-300 rounded bg-white dark:bg-gray-800">
+        <div className="p-4">
           <form onSubmit={handleSubmit(mintNFT)}>
             <div className="space-y-4">
               {/* Render input fields for each attribute */}
               <button
                 type="submit"
-                className="px-4 py-2 mt-4 bg-purple-600 text-white rounded hover:bg-purple-700"
+                className="px-7 uppercase py-4 bg-gray-600 text-lg text-white border border-black hover:bg-gray-700"
               >
                 Mint NFT
               </button>
