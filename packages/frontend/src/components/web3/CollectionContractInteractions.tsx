@@ -44,6 +44,7 @@ export const NFTMint: FC<MintAttributes> = ({
   const mintNFT = async () => {
     if (!activeAccount || !contract || !activeSigner || !api) {
       toast.error('Wallet not connected. Try again…');
+      console.log("Wallet not connected. Try again…")
       return;
     }
 
@@ -78,10 +79,13 @@ export const NFTMint: FC<MintAttributes> = ({
   };
 
   if (!api) return null;
+  if (!activeAccount) {
+    return <div className="p-4 text-lg text-gray-500 italic">Connect the wallet first to be able to mint.</div>;
+  }
 
   return (
     <>
-      <div className="flex grow flex-col space-y-4 max-w-[20rem]">
+      <div className="flex grow flex-row space-y-4">
         {/* Mint NFT Form */}
         <div className="p-4">
           <form onSubmit={handleSubmit(mintNFT)}>
@@ -91,7 +95,7 @@ export const NFTMint: FC<MintAttributes> = ({
                 type="submit"
                 className="px-7 uppercase py-4 bg-gray-600 text-lg text-white border border-black hover:bg-gray-700"
               >
-                Mint NFT
+                ✨ Mint NFT ✨
               </button>
             </div>
           </form>
@@ -99,8 +103,8 @@ export const NFTMint: FC<MintAttributes> = ({
 
         {/* Mint Status */}
         {mintStatus && (
-          <div className="p-4 mt-2 border border-gray-300 rounded bg-white dark:bg-gray-800">
-            {mintStatus}
+          <div className="p-4 italic mt-2 ">
+            Message: {mintStatus}
           </div>
         )}
       </div>
