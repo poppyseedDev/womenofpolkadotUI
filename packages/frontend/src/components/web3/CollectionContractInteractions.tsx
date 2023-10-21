@@ -44,15 +44,13 @@ export const NFTMint: FC<MintAttributes> = ({
   const mintNFT = async () => {
     if (!activeAccount || !contract || !activeSigner || !api) {
       toast.error('Wallet not connected. Try again…');
-      console.log("Wallet not connected. Try again…")
       return;
     }
 
     setMintStatus('Minting...');
     try {
-
       const decimals = api.registry.chainDecimals?.[0] || 12
-      const value = new BN(100).mul(new BN(10).pow(new BN(decimals)))
+      const value = new BN(TOKENS_TO_PAY).mul(new BN(10).pow(new BN(decimals)))
       
       //const paymentAmount = api.createType('Balance', TOKENS_TO_PAY); // Convert 100 tokens to the appropriate Balance type
       //console.log('paymentAmount', paymentAmount);
@@ -87,13 +85,13 @@ export const NFTMint: FC<MintAttributes> = ({
     <>
       <div className="flex grow flex-row space-y-4">
         {/* Mint NFT Form */}
-        <div className="p-4">
+        <div className="">
           <form onSubmit={handleSubmit(mintNFT)}>
             <div className="space-y-4">
               {/* Render input fields for each attribute */}
               <button
                 type="submit"
-                className="px-7 uppercase py-4 bg-gray-600 text-lg text-white border border-black hover:bg-gray-700"
+                className="px-7 uppercase py-4 text-lg text-white bg-gray-600 font-extrabold hover:bg-fuchsia-300 border border-cyan-500 transition duration-300"
               >
                 ✨ Mint NFT ✨
               </button>
@@ -103,7 +101,7 @@ export const NFTMint: FC<MintAttributes> = ({
 
         {/* Mint Status */}
         {mintStatus && (
-          <div className="p-4 italic mt-2 ">
+          <div className="italic ml-7 ">
             Message: {mintStatus}
           </div>
         )}

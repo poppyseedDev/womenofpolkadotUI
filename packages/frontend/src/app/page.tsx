@@ -20,7 +20,7 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <div className="flex flex-col items-end justify-center font-mono">
+      <div className="flex flex-col p-3 items-end justify-center font-mono">
         {/* Connect Wallet Button */}
         <ConnectButton />
       </div>

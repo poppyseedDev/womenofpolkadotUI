@@ -77,11 +77,19 @@ const DressUp: React.FC = () => {
   return (
     <>
     <div className='flex flex-col justify-center items-center'>
-      <button 
-        className="p-4 mb-4 uppercase bg-gray-600 text-white font-extrabold hover:bg-fuchsia-300 border border-cyan-500"
-        onClick={RandomiseImg}>
-          ✨ Randomise ✨
-      </button>
+      <div className='flex flex-row'>
+        <button 
+          className="px-7 mr-8 p-4 uppercase bg-gray-600 text-white font-extrabold hover:bg-fuchsia-300 border border-cyan-500 transition duration-300"
+          onClick={RandomiseImg}>
+            ✨ Randomise ✨
+        </button>
+        {/* Collection Mint Interactions */}
+        <div>
+          <NFTMint {...(Object.fromEntries(Object.entries(indices).filter(([key]) => key !== 'base')) as MintAttributes)} />
+        </div>
+
+      </div>
+
 
       <div className='grid grid-cols-1 lg:grid-cols-2'>
       <div className="flex text-center items-center justify-center font-mono">
@@ -123,9 +131,6 @@ const DressUp: React.FC = () => {
         </div>
       </div>
       </div >
-
-      {/* Collection Mint Interactions */}
-      <NFTMint {...(Object.fromEntries(Object.entries(indices).filter(([key]) => key !== 'base')) as MintAttributes)} />
     </div>
 
     </>

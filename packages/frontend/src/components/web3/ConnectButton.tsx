@@ -102,11 +102,17 @@ return (
   )}
   {!!activeAccount && (
     // Account Menu & Disconnect Button
-    <div className="p-4 space-y-4">
-      <div className="flex items-center space-x-4">
+    <div className=" space-y-4">
+      <div className="flex items-center ">
+        {/* Account Balance */}
+        {balanceFormatted !== undefined && (
+        <div className="px-4 py-2 font-bold text-gray-700 dark:text-gray-200">
+          {balanceFormatted}
+        </div>
+        )}
         {/* Account Name, Address, and AZNS-Domain (if assigned) */}
         <button
-          className="flex flex-col items-start p-4 border border-black  bg-white dark:bg-gray-900 shadow hover:bg-gray-100"
+          className="flex flex-col items-start p-4 border border-black  bg-white dark:bg-gray-900 shadow hover:bg-gray-100 dark:hover:bg-gray-800"
           onClick={() => setOpenChooseAccount(true)} 
           >
           <div className="space-y-1">
@@ -165,12 +171,6 @@ return (
             ))}
             </div>
           
-            {/* Account Balance */}
-            {balanceFormatted !== undefined && (
-              <div className="px-4 py-2 font-bold text-gray-700 hover:bg-gray-200">
-                {balanceFormatted}
-              </div>
-            )}
             <div className="p-2 flex justify-between items-center cursor-pointer hover:bg-red-100" onClick={() => disconnect?.()}>
               <span className="text-red-500">Disconnect</span>
               <AiOutlineDisconnect size={18} className="text-red-500" />
