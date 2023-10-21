@@ -10,8 +10,7 @@ import { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-type MintAttributes = {
-  to: string;
+export type MintAttributes = {
   background: number;
   skin: number;
   eyes: number;
@@ -23,13 +22,25 @@ type MintAttributes = {
   extra: number;
 };
 
-export const NFTMint: FC = () => {
+const TOKENS_TO_PAY = 100; // Tokens to pay for minting an NFT
+
+export const NFTMint: FC<MintAttributes> = ({
+    background,
+    skin,
+    eyes,
+    lips,
+    hair,
+    clothes,
+    hat,
+    accessories,
+    extra
+  }) => {
   const { api, activeAccount, activeSigner } = useInkathon();
   const { contract } = useRegisteredContract(ContractIds.Collection);
   const [mintStatus, setMintStatus] = useState<string>();
   const { register, handleSubmit } = useForm<MintAttributes>();
 
-  const mintNFT = async (attributes: MintAttributes) => {
+  const mintNFT = async () => {
     if (!activeAccount || !contract || !activeSigner || !api) {
       toast.error('Wallet not connected. Try again…');
       return;
@@ -37,18 +48,21 @@ export const NFTMint: FC = () => {
 
     setMintStatus('Minting...');
     try {
+      const paymentAmount = api.createType('Balance', TOKENS_TO_PAY); // Convert 100 tokens to the appropriate Balance type
+      console.log('paymentAmount', paymentAmount);
+
       // Assuming the function arguments are in the correct order
-      await contractTxWithToast(api, activeAccount.address, contract, 'payableMintImpl::mint', {}, [
-        attributes.to,
-        attributes.background,
-        attributes.skin,
-        attributes.eyes,
-        attributes.lips,
-        attributes.hair,
-        attributes.clothes,
-        attributes.hat,
-        attributes.accessories,
-        attributes.extra,
+      await contractTxWithToast(api, activeAccount.address, contract, 'payableMintImpl::mint', { value: 11320000000 }, [
+        activeAccount.address,
+        background,
+        skin,
+        eyes,
+        lips,
+        hair,
+        clothes,
+        hat,
+        accessories,
+        extra,
       ]);
       setMintStatus('Mint successful!');
     } catch (e) {
@@ -70,16 +84,6 @@ export const NFTMint: FC = () => {
           <form onSubmit={handleSubmit(mintNFT)}>
             <div className="space-y-4">
               {/* Render input fields for each attribute */}
-              {['to', 'background', 'skin', 'eyes', 'lips', 'hair', 'clothes', 'hat', 'accessories', 'extra'].map(attr => (
-                <div key={attr}>
-                  <label className="block mb-1 font-bold">{attr}</label>
-                  <input
-                    type="text"
-                    {...register(attr)}
-                    className="w-full p-2 border rounded-md"
-                  />
-                </div>
-              ))}
               <button
                 type="submit"
                 className="px-4 py-2 mt-4 bg-purple-600 text-white rounded hover:bg-purple-700"
