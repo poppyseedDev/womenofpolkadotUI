@@ -11,7 +11,7 @@ scale = { package = "parity-scale-codec", version = "3", default-features = fals
 scale-info = { version = "2.6", default-features = false, features = ["derive"], optional = true }
 
 openbrush = { tag = "4.0.0-beta", git = "https://github.com/Brushfam/openbrush-contracts", default-features = false, features = ["psp34", "ownable"] }
-payable_mint_pkg = { path = "../../logics", default-features = false }
+payable_mint_pkg = { path = "../logics", default-features = false }
 
 [dev-dependencies]
 ink_e2e = "4.2.0"

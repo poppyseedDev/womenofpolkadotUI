@@ -3,7 +3,7 @@
 import { HomePageTitle } from '@components/home/HomePageTitle'
 import { ChainInfo } from '@components/web3/ChainInfo'
 import { ConnectButton } from '@components/web3/ConnectButton'
-import { GreeterContractInteractions } from '@components/web3/GreeterContractInteractions'
+import { GreeterContractInteractions } from '@components/web3/CollectionContractInteractions'
 import { useInkathon } from '@scio-labs/use-inkathon'
 import DressUp from '@/components/dressup/DressUp';
 import type { NextPage } from 'next'

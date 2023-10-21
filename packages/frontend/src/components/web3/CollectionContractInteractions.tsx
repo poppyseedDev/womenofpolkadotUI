@@ -14,7 +14,7 @@ type UpdateGreetingValues = { newMessage: string }
 
 export const GreeterContractInteractions: FC = () => {
   const { api, activeAccount, activeSigner } = useInkathon()
-  const { contract, address: contractAddress } = useRegisteredContract(ContractIds.Greeter)
+  const { contract, address: contractAddress } = useRegisteredContract(ContractIds.Collection)
   const [greeterMessage, setGreeterMessage] = useState<string>()
   const [fetchIsLoading, setFetchIsLoading] = useState<boolean>()
   const [updateIsLoading, setUpdateIsLoading] = useState<boolean>()
@@ -26,8 +26,8 @@ export const GreeterContractInteractions: FC = () => {
 
     setFetchIsLoading(true)
     try {
-      const result = await contractQuery(api, '', contract, 'greet')
-      const { output, isError, decodedOutput } = decodeOutput(result, contract, 'greet')
+      const result = await contractQuery(api, '', contract, 'collection')
+      const { output, isError, decodedOutput } = decodeOutput(result, contract, 'collection')
       if (isError) throw new Error(decodedOutput)
       setGreeterMessage(output)
     } catch (e) {

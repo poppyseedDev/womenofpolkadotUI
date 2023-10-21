@@ -1,8 +1,8 @@
-use crate::impls::payable_mint::types::Data;
-use crate::traits::payable_mint;
-pub use crate::traits::payable_mint::PayableMint;
+use crate::impls::payable_mint::types::{Data, NFTAttributes};
+//use crate::traits::payable_mint;
+//pub use crate::traits::payable_mint::PayableMint;
 
-use ink::prelude::string::{String as PreludeString, ToString};
+use ink::prelude::string::ToString;
 use openbrush::contracts::psp34::extensions::metadata;
 use openbrush::{
     contracts::{ownable::*, psp34::*},
@@ -23,17 +23,42 @@ pub trait PayableMintImpl:
     + metadata::PSP34MetadataImpl
 {
     #[ink(message, payable)]
-    fn mint(&mut self, to: AccountId, mint_amount: u64) -> Result<(), PSP34Error> {
-        self.check_value(Self::env().transferred_value(), mint_amount)?;
-        self.check_amount(mint_amount)?;
+    fn mint(
+        &mut self, 
+        to: AccountId, 
+        background: u8,
+        skin: u8,
+        eyes: u8,
+        lips: u8,
+        hair: u8,
+        clothes: u8,
+        hat: u8,
+        accessories: u8,
+        extra: u8,
+    ) -> Result<(), PSP34Error> {
+        self.check_value(Self::env().transferred_value(), 1)?;
+        self.check_amount(1)?;
+
+        let attrs = NFTAttributes {
+            background,
+            skin,
+            eyes,
+            lips,
+            hair,
+            clothes,
+            hat,
+            accessories,
+            extra
+        };
 
         let next_to_mint = self.data::<Data>().last_token_id + 1; // first mint id is 1
-        let mint_offset = next_to_mint + mint_amount;
 
-        for mint_id in next_to_mint..mint_offset {
-            psp34::InternalImpl::_mint_to(self, to, Id::U64(mint_id))?;
-            self.data::<Data>().last_token_id += 1;
-        }
+        psp34::InternalImpl::_mint_to(self, to, Id::U64(next_to_mint))?;
+        self.data::<Data>().last_token_id += 1;
+
+        // Store the attributes for the minted token.
+        self.data::<Data>().token_attributes.insert(&Id::U64(next_to_mint), &attrs);
+
 
         Ok(())
     }
