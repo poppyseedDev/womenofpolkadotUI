@@ -1,10 +1,10 @@
 {
   "source": {
-    "hash": "0x5d76eca23b90aca0cce0930a981880fb841b35ef8995f7eaf0539da9f6710759",
+    "hash": "0x019597c1bb6b0ae98569194970e3213480ce0e64b396ebb90cb9179388f07d10",
     "language": "ink! 4.3.0",
     "compiler": "rustc 1.73.0",
     "build_info": {
-      "build_mode": "Debug",
+      "build_mode": "Release",
       "cargo_contract_version": "3.2.0",
       "rust_toolchain": "stable-aarch64-apple-darwin",
       "wasm_opt_settings": {
@@ -161,7 +161,7 @@
               "displayName": [
                 "Id"
               ],
-              "type": 25
+              "type": 24
             }
           }
         ],
@@ -202,7 +202,7 @@
               "displayName": [
                 "Option"
               ],
-              "type": 24
+              "type": 25
             }
           },
           {
@@ -213,7 +213,7 @@
               "displayName": [
                 "bool"
               ],
-              "type": 26
+              "type": 27
             }
           }
         ],
@@ -231,24 +231,6 @@
       "type": 11
     },
     "messages": [
-      {
-        "args": [],
-        "default": false,
-        "docs": [
-          " Withdraws funds to contract owner"
-        ],
-        "label": "PayableMintImpl::withdraw",
-        "mutates": true,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 12
-        },
-        "selector": "0x7db49d31"
-      },
       {
         "args": [
           {
@@ -283,51 +265,139 @@
       {
         "args": [
           {
-            "label": "token_id",
+            "label": "to",
             "type": {
               "displayName": [
                 "payable_mint",
                 "payable_mint",
                 "payablemintimpl_external",
-                "TokenUriInput1"
+                "MintInput1"
               ],
-              "type": 8
+              "type": 0
+            }
+          },
+          {
+            "label": "background",
+            "type": {
+              "displayName": [
+                "payable_mint",
+                "payable_mint",
+                "payablemintimpl_external",
+                "MintInput2"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "label": "skin",
+            "type": {
+              "displayName": [
+                "payable_mint",
+                "payable_mint",
+                "payablemintimpl_external",
+                "MintInput3"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "label": "eyes",
+            "type": {
+              "displayName": [
+                "payable_mint",
+                "payable_mint",
+                "payablemintimpl_external",
+                "MintInput4"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "label": "lips",
+            "type": {
+              "displayName": [
+                "payable_mint",
+                "payable_mint",
+                "payablemintimpl_external",
+                "MintInput5"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "label": "hair",
+            "type": {
+              "displayName": [
+                "payable_mint",
+                "payable_mint",
+                "payablemintimpl_external",
+                "MintInput6"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "label": "clothes",
+            "type": {
+              "displayName": [
+                "payable_mint",
+                "payable_mint",
+                "payablemintimpl_external",
+                "MintInput7"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "label": "hat",
+            "type": {
+              "displayName": [
+                "payable_mint",
+                "payable_mint",
+                "payablemintimpl_external",
+                "MintInput8"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "label": "accessories",
+            "type": {
+              "displayName": [
+                "payable_mint",
+                "payable_mint",
+                "payablemintimpl_external",
+                "MintInput9"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "label": "extra",
+            "type": {
+              "displayName": [
+                "payable_mint",
+                "payable_mint",
+                "payablemintimpl_external",
+                "MintInput10"
+              ],
+              "type": 2
             }
           }
         ],
         "default": false,
-        "docs": [
-          " Get URI from token ID"
-        ],
-        "label": "PayableMintImpl::token_uri",
-        "mutates": false,
-        "payable": false,
+        "docs": [],
+        "label": "PayableMintImpl::mint",
+        "mutates": true,
+        "payable": true,
         "returnType": {
           "displayName": [
             "ink",
             "MessageResult"
           ],
-          "type": 15
+          "type": 12
         },
-        "selector": "0xfdc589be"
-      },
-      {
-        "args": [],
-        "default": false,
-        "docs": [
-          " Get max supply of tokens"
-        ],
-        "label": "PayableMintImpl::max_supply",
-        "mutates": false,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 17
-        },
-        "selector": "0xbe549460"
+        "selector": "0xe22765b7"
       },
       {
         "args": [
@@ -364,9 +434,9 @@
         "args": [],
         "default": false,
         "docs": [
-          " Get max number of tokens which could be minted per call"
+          " Withdraws funds to contract owner"
         ],
-        "label": "PayableMintImpl::get_max_mint_amount",
+        "label": "PayableMintImpl::withdraw",
         "mutates": true,
         "payable": false,
         "returnType": {
@@ -374,9 +444,9 @@
             "ink",
             "MessageResult"
           ],
-          "type": 17
+          "type": 12
         },
-        "selector": "0x7221775d"
+        "selector": "0x7db49d31"
       },
       {
         "args": [],
@@ -392,50 +462,76 @@
             "ink",
             "MessageResult"
           ],
-          "type": 18
+          "type": 15
         },
         "selector": "0x80d5f120"
       },
       {
+        "args": [],
+        "default": false,
+        "docs": [
+          " Get max number of tokens which could be minted per call"
+        ],
+        "label": "PayableMintImpl::get_max_mint_amount",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 16
+        },
+        "selector": "0x7221775d"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [
+          " Get max supply of tokens"
+        ],
+        "label": "PayableMintImpl::max_supply",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 16
+        },
+        "selector": "0xbe549460"
+      },
+      {
         "args": [
           {
-            "label": "to",
+            "label": "token_id",
             "type": {
               "displayName": [
                 "payable_mint",
                 "payable_mint",
                 "payablemintimpl_external",
-                "MintInput1"
-              ],
-              "type": 0
-            }
-          },
-          {
-            "label": "mint_amount",
-            "type": {
-              "displayName": [
-                "payable_mint",
-                "payable_mint",
-                "payablemintimpl_external",
-                "MintInput2"
+                "TokenUriInput1"
               ],
               "type": 8
             }
           }
         ],
         "default": false,
-        "docs": [],
-        "label": "PayableMintImpl::mint",
-        "mutates": true,
-        "payable": true,
+        "docs": [
+          " Get URI from token ID"
+        ],
+        "label": "PayableMintImpl::token_uri",
+        "mutates": false,
+        "payable": false,
         "returnType": {
           "displayName": [
             "ink",
             "MessageResult"
           ],
-          "type": 12
+          "type": 17
         },
-        "selector": "0xe22765b7"
+        "selector": "0xfdc589be"
       },
       {
         "args": [],
@@ -499,6 +595,112 @@
       {
         "args": [
           {
+            "label": "id",
+            "type": {
+              "displayName": [
+                "psp34_external",
+                "OwnerOfInput1"
+              ],
+              "type": 24
+            }
+          }
+        ],
+        "default": false,
+        "docs": [],
+        "label": "PSP34::owner_of",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 22
+        },
+        "selector": "0x1168624d"
+      },
+      {
+        "args": [
+          {
+            "label": "owner",
+            "type": {
+              "displayName": [
+                "psp34_external",
+                "AllowanceInput1"
+              ],
+              "type": 0
+            }
+          },
+          {
+            "label": "operator",
+            "type": {
+              "displayName": [
+                "psp34_external",
+                "AllowanceInput2"
+              ],
+              "type": 0
+            }
+          },
+          {
+            "label": "id",
+            "type": {
+              "displayName": [
+                "psp34_external",
+                "AllowanceInput3"
+              ],
+              "type": 25
+            }
+          }
+        ],
+        "default": false,
+        "docs": [],
+        "label": "PSP34::allowance",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 26
+        },
+        "selector": "0x4790f55a"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
+        "label": "PSP34::collection_id",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 28
+        },
+        "selector": "0xffa27a5f"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
+        "label": "PSP34::total_supply",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 15
+        },
+        "selector": "0x628413fe"
+      },
+      {
+        "args": [
+          {
             "label": "operator",
             "type": {
               "displayName": [
@@ -515,7 +717,7 @@
                 "psp34_external",
                 "ApproveInput2"
               ],
-              "type": 24
+              "type": 25
             }
           },
           {
@@ -525,7 +727,7 @@
                 "psp34_external",
                 "ApproveInput3"
               ],
-              "type": 26
+              "type": 27
             }
           }
         ],
@@ -562,7 +764,7 @@
                 "psp34_external",
                 "TransferInput2"
               ],
-              "type": 25
+              "type": 24
             }
           },
           {
@@ -613,115 +815,9 @@
             "ink",
             "MessageResult"
           ],
-          "type": 27
-        },
-        "selector": "0xcde7e55f"
-      },
-      {
-        "args": [
-          {
-            "label": "owner",
-            "type": {
-              "displayName": [
-                "psp34_external",
-                "AllowanceInput1"
-              ],
-              "type": 0
-            }
-          },
-          {
-            "label": "operator",
-            "type": {
-              "displayName": [
-                "psp34_external",
-                "AllowanceInput2"
-              ],
-              "type": 0
-            }
-          },
-          {
-            "label": "id",
-            "type": {
-              "displayName": [
-                "psp34_external",
-                "AllowanceInput3"
-              ],
-              "type": 24
-            }
-          }
-        ],
-        "default": false,
-        "docs": [],
-        "label": "PSP34::allowance",
-        "mutates": false,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 28
-        },
-        "selector": "0x4790f55a"
-      },
-      {
-        "args": [
-          {
-            "label": "id",
-            "type": {
-              "displayName": [
-                "psp34_external",
-                "OwnerOfInput1"
-              ],
-              "type": 25
-            }
-          }
-        ],
-        "default": false,
-        "docs": [],
-        "label": "PSP34::owner_of",
-        "mutates": false,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 22
-        },
-        "selector": "0x1168624d"
-      },
-      {
-        "args": [],
-        "default": false,
-        "docs": [],
-        "label": "PSP34::total_supply",
-        "mutates": false,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 18
-        },
-        "selector": "0x628413fe"
-      },
-      {
-        "args": [],
-        "default": false,
-        "docs": [],
-        "label": "PSP34::collection_id",
-        "mutates": false,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
           "type": 29
         },
-        "selector": "0xffa27a5f"
+        "selector": "0xcde7e55f"
       },
       {
         "args": [
@@ -742,7 +838,7 @@
                 "psp34burnable_external",
                 "BurnInput2"
               ],
-              "type": 25
+              "type": 24
             }
           }
         ],
@@ -833,7 +929,7 @@
                 "psp34metadata_external",
                 "GetAttributeInput1"
               ],
-              "type": 25
+              "type": 24
             }
           },
           {
@@ -1188,6 +1284,102 @@
                         }
                       },
                       "name": "max_amount"
+                    },
+                    {
+                      "layout": {
+                        "root": {
+                          "layout": {
+                            "struct": {
+                              "fields": [
+                                {
+                                  "layout": {
+                                    "leaf": {
+                                      "key": "0xea07a9ab",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "background"
+                                },
+                                {
+                                  "layout": {
+                                    "leaf": {
+                                      "key": "0xea07a9ab",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "skin"
+                                },
+                                {
+                                  "layout": {
+                                    "leaf": {
+                                      "key": "0xea07a9ab",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "eyes"
+                                },
+                                {
+                                  "layout": {
+                                    "leaf": {
+                                      "key": "0xea07a9ab",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "lips"
+                                },
+                                {
+                                  "layout": {
+                                    "leaf": {
+                                      "key": "0xea07a9ab",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "hair"
+                                },
+                                {
+                                  "layout": {
+                                    "leaf": {
+                                      "key": "0xea07a9ab",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "clothes"
+                                },
+                                {
+                                  "layout": {
+                                    "leaf": {
+                                      "key": "0xea07a9ab",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "hat"
+                                },
+                                {
+                                  "layout": {
+                                    "leaf": {
+                                      "key": "0xea07a9ab",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "accessories"
+                                },
+                                {
+                                  "layout": {
+                                    "leaf": {
+                                      "key": "0xea07a9ab",
+                                      "ty": 2
+                                    }
+                                  },
+                                  "name": "extra"
+                                }
+                              ],
+                              "name": "NFTAttributes"
+                            }
+                          },
+                          "root_key": "0xea07a9ab"
+                        }
+                      },
+                      "name": "token_attributes"
                     }
                   ],
                   "name": "Data"
@@ -1508,7 +1700,7 @@
               {
                 "fields": [
                   {
-                    "type": 16
+                    "type": 5
                   }
                 ],
                 "index": 0,
@@ -1529,7 +1721,7 @@
         "params": [
           {
             "name": "T",
-            "type": 16
+            "type": 5
           },
           {
             "name": "E",
@@ -1543,48 +1735,6 @@
     },
     {
       "id": 16,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 6
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 14
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 6
-          },
-          {
-            "name": "E",
-            "type": 14
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 17,
       "type": {
         "def": {
           "variant": {
@@ -1626,7 +1776,7 @@
       }
     },
     {
-      "id": 18,
+      "id": 17,
       "type": {
         "def": {
           "variant": {
@@ -1634,7 +1784,7 @@
               {
                 "fields": [
                   {
-                    "type": 5
+                    "type": 18
                   }
                 ],
                 "index": 0,
@@ -1655,11 +1805,53 @@
         "params": [
           {
             "name": "T",
-            "type": 5
+            "type": 18
           },
           {
             "name": "E",
             "type": 11
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 6
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 14
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 6
+          },
+          {
+            "name": "E",
+            "type": 14
           }
         ],
         "path": [
@@ -1859,39 +2051,6 @@
           "variant": {
             "variants": [
               {
-                "index": 0,
-                "name": "None"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 25
-                  }
-                ],
-                "index": 1,
-                "name": "Some"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 25
-          }
-        ],
-        "path": [
-          "Option"
-        ]
-      }
-    },
-    {
-      "id": 25,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
                 "fields": [
                   {
                     "type": 2,
@@ -1963,7 +2122,82 @@
       }
     },
     {
+      "id": 25,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 0,
+                "name": "None"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 24
+                  }
+                ],
+                "index": 1,
+                "name": "Some"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 24
+          }
+        ],
+        "path": [
+          "Option"
+        ]
+      }
+    },
+    {
       "id": 26,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 27
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 11
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 27
+          },
+          {
+            "name": "E",
+            "type": 11
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 27,
       "type": {
         "def": {
           "primitive": "bool"
@@ -1971,7 +2205,49 @@
       }
     },
     {
-      "id": 27,
+      "id": 28,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 24
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 11
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 24
+          },
+          {
+            "name": "E",
+            "type": 11
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 29,
       "type": {
         "def": {
           "variant": {
@@ -2001,90 +2277,6 @@
           {
             "name": "T",
             "type": 4
-          },
-          {
-            "name": "E",
-            "type": 11
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 28,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 26
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 11
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 26
-          },
-          {
-            "name": "E",
-            "type": 11
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 29,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 25
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 11
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 25
           },
           {
             "name": "E",
@@ -2147,7 +2339,7 @@
               {
                 "fields": [
                   {
-                    "type": 25
+                    "type": 24
                   }
                 ],
                 "index": 0,
@@ -2168,7 +2360,7 @@
         "params": [
           {
             "name": "T",
-            "type": 25
+            "type": 24
           },
           {
             "name": "E",
