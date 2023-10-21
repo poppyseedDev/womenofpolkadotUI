@@ -24,7 +24,7 @@ const ImagePaths: ImagePathType[] = [
 const DressUp: React.FC = () => {
   const [indices, setIndices] = useState<IndicesType>({ background: 0, skin: 0, base: 0, eyes: 0, lips: 0, hair: 0, clothes: 0, hat: 0, accessories: 0, extra: 0 });
 
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -32,12 +32,17 @@ const DressUp: React.FC = () => {
       return;
     }
     const ctx = canvas.getContext('2d');
+
+    if (!ctx) {
+      console.error('Failed to get 2D context from canvas');
+      return;
+    }
   
-    const loadImage = (src) => {
-      return new Promise((resolve, reject) => {
+    const loadImage = (src: string) => {
+      return new Promise<HTMLImageElement>((resolve, reject) => {
         const img = new window.Image();
         img.onload = () => resolve(img);
-        img.onerror = reject;
+        img.onerror = (e) => reject(e);
         img.src = src;
       });
     };
