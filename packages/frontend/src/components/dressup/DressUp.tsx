@@ -26,7 +26,7 @@ const ImagePaths: ImagePathType[] = [
 const DressUp: React.FC = () => {
   const [indices, setIndices] = useState<IndicesType>({ background: 0, skin: 0, base: 0, eyes: 0, lips: 0, hair: 0, clothes: 0, hat: 0, accessories: 0, extra: 0 });
 
-  const client = new NFTStorage({ token: 'YOUR_NFT_STORAGE_API_KEY' });
+  const client = new NFTStorage({ token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDdDZGNFODk1REJGZTRjMTFBOUY1MzU1NDg2QTc2N0U0YWNFOTA0ODUiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY5NzkxOTQ2ODE3OCwibmFtZSI6InRlc3QifQ.D6DCYG3C6AKsptCHzK1w_oaOeC7_fpWSgwgYHO0Sm1w' });
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
