@@ -3,8 +3,6 @@ use openbrush::{
     contracts::psp34::PSP34Error,
     traits::{AccountId, Balance},
 };
-use crate::impls::payable_mint::types::NFTAttributes;
-
 
 #[openbrush::wrapper]
 pub type PayableMintRef = dyn PayableMint;
@@ -12,7 +10,18 @@ pub type PayableMintRef = dyn PayableMint;
 #[openbrush::trait_definition]
 pub trait PayableMint {
     #[ink(message, payable)]
-    fn mint(&mut self, to: AccountId, attributes: NFTAttributes) -> Result<(), PSP34Error>;
+    fn mint(
+        &mut self, 
+        to: AccountId, 
+        background: u8,
+        skin: u8,
+        eyes: u8,
+        lips: u8,
+        hair: u8,
+        clothes: u8,
+        hat: u8,
+        accessories: u8,
+        extra: u8,) -> Result<(), PSP34Error>;
     #[ink(message)]
     fn withdraw(&mut self) -> Result<(), PSP34Error>;
     #[ink(message)]

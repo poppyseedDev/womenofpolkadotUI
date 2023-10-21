@@ -1,9 +1,12 @@
-use ink::storage::{traits::StorageLayout, Mapping};
+use ink::storage::Mapping;
 use openbrush::{traits::Balance, contracts::psp34::Id};
-use scale_info::TypeInfo;
 
 /// NFT attributes structure.
-#[derive(Clone, Default, Debug, scale::Encode, scale::Decode, TypeInfo, StorageLayout)]
+#[derive(Clone, Default, Debug, scale::Encode, scale::Decode)]
+#[cfg_attr(
+    feature = "std",
+    derive(scale_info::TypeInfo, ink::storage::traits::StorageLayout)
+)]
 pub struct NFTAttributes {
     pub background: u8,
     pub skin: u8,

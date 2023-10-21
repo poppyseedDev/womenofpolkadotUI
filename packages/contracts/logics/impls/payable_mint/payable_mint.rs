@@ -2,8 +2,7 @@ use crate::impls::payable_mint::types::{Data, NFTAttributes};
 //use crate::traits::payable_mint;
 //pub use crate::traits::payable_mint::PayableMint;
 
-use ink::metadata::layout::HashingStrategy;
-use ink::prelude::string::{ToString};
+use ink::prelude::string::ToString;
 use openbrush::contracts::psp34::extensions::metadata;
 use openbrush::{
     contracts::{ownable::*, psp34::*},
