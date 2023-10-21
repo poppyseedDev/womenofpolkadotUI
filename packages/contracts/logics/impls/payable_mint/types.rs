@@ -5,15 +5,15 @@ use scale_info::TypeInfo;
 /// NFT attributes structure.
 #[derive(Clone, Default, Debug, scale::Encode, scale::Decode, TypeInfo, StorageLayout)]
 pub struct NFTAttributes {
-    background: u8,
-    skin: u8,
-    eyes: u8,
-    lips: u8,
-    hair: u8,
-    clothes: u8,
-    hat: u8,
-    accessories: u8,
-    extra: u8,
+    pub background: u8,
+    pub skin: u8,
+    pub eyes: u8,
+    pub lips: u8,
+    pub hair: u8,
+    pub clothes: u8,
+    pub hat: u8,
+    pub accessories: u8,
+    pub extra: u8,
 }
 
 #[derive(Default, Debug)]

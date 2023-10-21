@@ -215,7 +215,7 @@ pub mod collection {
 
             assert_eq!(PSP34Impl::total_supply(&collection), 0);
             test::set_value_transferred::<ink::env::DefaultEnvironment>(PRICE);
-            assert!(collection.mint(accounts.bob, 1).is_ok());
+            assert!(collection.mint(accounts.bob, 1, 1, 1, 1, 1, 1, 1, 1, 1).is_ok());
             assert_eq!(PSP34Impl::total_supply(&collection), 1);
             assert_eq!(
                 PSP34Impl::owner_of(&collection, Id::U64(1)),
