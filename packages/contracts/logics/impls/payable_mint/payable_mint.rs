@@ -1,4 +1,4 @@
-use crate::impls::payable_mint::types::Data;
+use crate::impls::payable_mint::types::{Data, NFTAttributes};
 //use crate::traits::payable_mint;
 //pub use crate::traits::payable_mint::PayableMint;
 
@@ -23,17 +23,18 @@ pub trait PayableMintImpl:
     + metadata::PSP34MetadataImpl
 {
     #[ink(message, payable)]
-    fn mint(&mut self, to: AccountId, mint_amount: u64) -> Result<(), PSP34Error> {
-        self.check_value(Self::env().transferred_value(), mint_amount)?;
-        self.check_amount(mint_amount)?;
+    fn mint(&mut self, to: AccountId, attributes: NFTAttributes) -> Result<(), PSP34Error> {
+        self.check_value(Self::env().transferred_value(), 1)?;
+        self.check_amount(1)?;
 
         let next_to_mint = self.data::<Data>().last_token_id + 1; // first mint id is 1
-        let mint_offset = next_to_mint + mint_amount;
 
-        for mint_id in next_to_mint..mint_offset {
-            psp34::InternalImpl::_mint_to(self, to, Id::U64(mint_id))?;
-            self.data::<Data>().last_token_id += 1;
-        }
+        psp34::InternalImpl::_mint_to(self, to, Id::U64(next_to_mint))?;
+        self.data::<Data>().last_token_id += 1;
+
+        // Store the attributes for the minted token.
+        self.data::<Data>().token_attributes.insert(&Id::U64(next_to_mint), &attributes);
+
 
         Ok(())
     }

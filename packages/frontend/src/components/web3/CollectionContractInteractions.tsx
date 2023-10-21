@@ -26,8 +26,8 @@ export const GreeterContractInteractions: FC = () => {
 
     setFetchIsLoading(true)
     try {
-      const result = await contractQuery(api, '', contract, 'greet')
-      const { output, isError, decodedOutput } = decodeOutput(result, contract, 'greet')
+      const result = await contractQuery(api, '', contract, 'collection')
+      const { output, isError, decodedOutput } = decodeOutput(result, contract, 'collection')
       if (isError) throw new Error(decodedOutput)
       setGreeterMessage(output)
     } catch (e) {

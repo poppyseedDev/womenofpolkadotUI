@@ -1,8 +1,10 @@
 use ink::prelude::string::String as PreludeString;
 use openbrush::{
-    contracts::{psp34::PSP34Error},
+    contracts::psp34::PSP34Error,
     traits::{AccountId, Balance},
 };
+use crate::impls::payable_mint::types::NFTAttributes;
+
 
 #[openbrush::wrapper]
 pub type PayableMintRef = dyn PayableMint;
@@ -10,7 +12,7 @@ pub type PayableMintRef = dyn PayableMint;
 #[openbrush::trait_definition]
 pub trait PayableMint {
     #[ink(message, payable)]
-    fn mint(&mut self, to: AccountId, mint_amount: u64) -> Result<(), PSP34Error>;
+    fn mint(&mut self, to: AccountId, attributes: NFTAttributes) -> Result<(), PSP34Error>;
     #[ink(message)]
     fn withdraw(&mut self) -> Result<(), PSP34Error>;
     #[ink(message)]
