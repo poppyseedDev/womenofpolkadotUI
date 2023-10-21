@@ -1,4 +1,5 @@
 import { ContractIds } from '@deployments/deployments';
+import { BN } from '@polkadot/util';
 import {
   contractQuery,
   decodeOutput,
@@ -48,11 +49,15 @@ export const NFTMint: FC<MintAttributes> = ({
 
     setMintStatus('Minting...');
     try {
-      const paymentAmount = api.createType('Balance', TOKENS_TO_PAY); // Convert 100 tokens to the appropriate Balance type
-      console.log('paymentAmount', paymentAmount);
+
+      const decimals = api.registry.chainDecimals?.[0] || 12
+      const value = new BN(100).mul(new BN(10).pow(new BN(decimals)))
+      
+      //const paymentAmount = api.createType('Balance', TOKENS_TO_PAY); // Convert 100 tokens to the appropriate Balance type
+      //console.log('paymentAmount', paymentAmount);
 
       // Assuming the function arguments are in the correct order
-      await contractTxWithToast(api, activeAccount.address, contract, 'payableMintImpl::mint', { value: 11320000000 }, [
+      await contractTxWithToast(api, activeAccount.address, contract, 'payableMintImpl::mint', { value: value }, [
         activeAccount.address,
         background,
         skin,
