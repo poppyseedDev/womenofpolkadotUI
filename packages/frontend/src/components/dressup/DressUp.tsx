@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { IndicesType, ImagePathType } from './types';
 import ImageSwitcher from './ImageSwitcher';
 import { MintAttributes, NFTMint } from '@components/web3/CollectionContractInteractions';
+import UserForm from '@components/UserForm/UserForm';
 
 const generatePaths = (categoryName: string, itemName: string, count: number) => {
   return Array(count).fill(0).map((_, i) => `/images/nfts/${categoryName}/${itemName}${i + 1}.png`);
@@ -86,6 +87,8 @@ const DressUp: React.FC = () => {
         {/* Collection Mint Interactions */}
         <div>
           <NFTMint {...(Object.fromEntries(Object.entries(indices).filter(([key]) => key !== 'base')) as MintAttributes)} />
+        </div>
+        <div>
         </div>
 
       </div>

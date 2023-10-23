@@ -1,10 +1,16 @@
 "use client";
-
+import { InjectedAccount } from '@polkadot/extension-inject/types'
+import { FC, useMemo } from 'react'
+import { AccountName } from '@components/web3/AccountName';
 // components/UserForm.tsx
 
 import { useState } from 'react';
 
-const UserForm = () => {
+export interface AccountNameProps {
+    activeAccount: String
+  }
+
+export const UserForm: FC<AccountNameProps> = ({ activeAccount, ...rest }) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -65,72 +71,83 @@ const UserForm = () => {
     return (
         <>
         {alert.message && 
-            <div className={`text-lg font-semibold mb-4 px-4 py-2 rounded ${alert.status === 'success' ? 'bg-green-200 text-green-700' : 'bg-red-200 text-red-700'}`}>
-            {alert.status === 'success' ? '✅' : '❌'} {alert.message}
+            <div className={`text-lg font-semibold mb-4 px-4 py-2 rounded shadow-md ${alert.status === 'success' ? 'bg-green-200 text-green-700' : 'bg-red-200 text-red-700'}`}>
+                {alert.status === 'success' ? '✅' : '❌'} {alert.message}
+                
+
+                <p className="mt-2">{alert.status === 'success' ? 'Thank you for signing up! We will contact you soon and let you know if you were successfully verified.' :
+                 'Looks like there is something wrong, please submit an issue on our github repository or contact us.'} </p>
             </div>
         }
-        <form onSubmit={onSubmit} className="space-y-4 flex flex-col space-x-4">
-            <input
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                placeholder="First Name"
-                required
-                className="p-2 border dark:bg-black border-gray-300"
-            />
-            <input
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                placeholder="Last Name"
-                required
-                className="p-2 border dark:bg-black border-gray-300"
-            />
-            <select
-                name="sex"
-                value={formData.sex}
-                onChange={handleChange}
-                className="p-2 border dark:bg-black border-gray-300">
-                <option value="" disabled>Select sex</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="female">Other</option>
-            </select>
-            <input
-                name="twitterAccount"
-                value={formData.twitterAccount}
-                onChange={handleChange}
-                placeholder="Twitter Account"
-                required
-                className="p-2 border dark:bg-black border-gray-300"
-            />
-            <input
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                type="email"
-                placeholder="email"
-                required
-                className="p-2 border dark:bg-black border-gray-300"
-            />
-            <input
-                name="telegramAccount"
-                value={formData.telegramAccount}
-                onChange={handleChange}
-                placeholder="Telegram account"
-                className="p-2 border dark:bg-black border-gray-300"
-            />
-            <input
-                name="accountString"
-                value={formData.accountString}
-                onChange={handleChange}
-                placeholder="Account String"
-                className="p-2 border dark:bg-black border-gray-300"
-            />
-            <button type="submit" className="p-2 bg-blue-500 text-white">
-                Submit
-            </button>
-        </form>
+        <div className='flex flex-col justify-center items-center space-y-5 '>
+            <p className="mb-4 text-gray-700">When you will be successfully verified, you will be able to mint on this account: <span className=" text-xs">{activeAccount}</span></p>
+            <form onSubmit={onSubmit} className="space-y-4 w-full max-w-md">
+                <input
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    placeholder="First Name"
+                    required
+                    className="w-full p-2.5 border rounded-md border-gray-300 focus:border-blue-500 hover:border-gray-400 transition focus:outline-none focus:ring-1 focus:ring-blue-200"
+                />
+                <input
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    placeholder="Last Name"
+                    required
+                    className="w-full p-2.5 border rounded-md border-gray-300 focus:border-blue-500 hover:border-gray-400 transition focus:outline-none focus:ring-1 focus:ring-blue-200"
+                />
+                <select
+                    name="sex"
+                    value={formData.sex}
+                    onChange={handleChange}
+                    className="w-full p-2.5 border rounded-md border-gray-300 focus:border-blue-500 hover:border-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-200">
+                    <option value="" disabled>Select sex</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="female">Other</option>
+                </select>
+                <input
+                    name="twitterAccount"
+                    value={formData.twitterAccount}
+                    onChange={handleChange}
+                    placeholder="Twitter Account"
+                    required
+                    className="w-full p-2.5 border rounded-md border-gray-300 focus:border-blue-500 hover:border-gray-400 transition focus:outline-none focus:ring-1 focus:ring-blue-200"
+                />
+                <input
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    type="email"
+                    placeholder="email"
+                    required
+                    className="w-full p-2.5 border rounded-md border-gray-300 focus:border-blue-500 hover:border-gray-400 transition focus:outline-none focus:ring-1 focus:ring-blue-200"
+                />
+                <input
+                    name="telegramAccount"
+                    value={formData.telegramAccount}
+                    onChange={handleChange}
+                    placeholder="Telegram account"
+                    className="w-full p-2.5 border rounded-md border-gray-300 focus:border-blue-500 hover:border-gray-400 transition focus:outline-none focus:ring-1 focus:ring-blue-200"
+                />
+                <input
+                    name="accountString"
+                    value={formData.accountString}
+                    onChange={handleChange}
+                    placeholder="Account String"
+                    className="w-full p-2.5 border rounded-md border-gray-300 focus:border-blue-500 hover:border-gray-400 transition focus:outline-none focus:ring-1 focus:ring-blue-200"
+                />
+                <button type="submit" className="w-full p-2.5 bg-blue-500 text-white rounded-md hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 transition">
+                    Submit
+                </button>
+            </form>
+
+        </div>
+        
+        
+
         </>
 
     );
