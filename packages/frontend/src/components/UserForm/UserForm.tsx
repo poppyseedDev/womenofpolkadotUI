@@ -1,7 +1,5 @@
 "use client";
-import { InjectedAccount } from '@polkadot/extension-inject/types'
 import { FC, useMemo } from 'react'
-import { AccountName } from '@components/web3/AccountName';
 // components/UserForm.tsx
 
 import { useState } from 'react';
@@ -18,7 +16,7 @@ export const UserForm: FC<AccountNameProps> = ({ activeAccount, ...rest }) => {
         twitterAccount: '',
         telegramAccount: '',
         email: '',
-        accountString: '',
+        accountString: activeAccount,
     });
 
     const [alert, setAlert] = useState({
@@ -49,7 +47,7 @@ export const UserForm: FC<AccountNameProps> = ({ activeAccount, ...rest }) => {
                     twitterAccount: '',
                     telegramAccount: '',
                     email: '',
-                    accountString: '',
+                    accountString: activeAccount,
                 });
             } else {
                 const data = await response.json();
@@ -102,6 +100,7 @@ export const UserForm: FC<AccountNameProps> = ({ activeAccount, ...rest }) => {
                     name="sex"
                     value={formData.sex}
                     onChange={handleChange}
+                    required
                     className="w-full p-2.5 border rounded-md border-gray-300 focus:border-blue-500 hover:border-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-200">
                     <option value="" disabled>Select sex</option>
                     <option value="male">Male</option>
@@ -130,13 +129,6 @@ export const UserForm: FC<AccountNameProps> = ({ activeAccount, ...rest }) => {
                     value={formData.telegramAccount}
                     onChange={handleChange}
                     placeholder="Telegram account"
-                    className="w-full p-2.5 border rounded-md border-gray-300 focus:border-blue-500 hover:border-gray-400 transition focus:outline-none focus:ring-1 focus:ring-blue-200"
-                />
-                <input
-                    name="accountString"
-                    value={formData.accountString}
-                    onChange={handleChange}
-                    placeholder="Account String"
                     className="w-full p-2.5 border rounded-md border-gray-300 focus:border-blue-500 hover:border-gray-400 transition focus:outline-none focus:ring-1 focus:ring-blue-200"
                 />
                 <button type="submit" className="w-full p-2.5 bg-blue-500 text-white rounded-md hover:bg-blue-600 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 transition">
