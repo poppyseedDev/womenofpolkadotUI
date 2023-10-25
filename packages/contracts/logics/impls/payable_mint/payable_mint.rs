@@ -25,7 +25,7 @@ pub trait PayableMintImpl:
     #[ink(message, payable)]
     fn mint(
         &mut self, 
-        to: AccountId, 
+        to: AccountId,
         background: u8,
         skin: u8,
         eyes: u8,

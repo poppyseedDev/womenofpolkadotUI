@@ -12,3 +12,14 @@ Currently the work is split into:
  - creating the art with different attributes, like hats, hairstyles etc. etc.
  - writing the frontend, where each individual that has there wallet address approved can come to the site, choose to modify their NFT how they like and mint it
  - smart contract has to have the ability to mint the NFTs, to trade them, list them for a certain price. Also there has to be an access list on who is allowed to mint the individual NFTs.
+
+
+Deploy smart contracts:
+```
+https://contracts-ui.substrate.io/
+```
+
+Start prisma studio
+```
+ npx prisma studio
+```
