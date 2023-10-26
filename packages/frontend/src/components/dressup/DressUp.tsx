@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { IndicesType, ImagePathType } from './types';
 import ImageSwitcher from './ImageSwitcher';
 import { MintAttributes, NFTMint } from '@components/web3/CollectionContractInteractions';
+// Import nft.storage library
+import { NFTStorage, File } from 'nft.storage';
 
 const generatePaths = (categoryName: string, itemName: string, count: number) => {
   return Array(count).fill(0).map((_, i) => `/images/nfts/${categoryName}/${itemName}${i + 1}.png`);
@@ -24,6 +26,7 @@ const ImagePaths: ImagePathType[] = [
 const DressUp: React.FC = () => {
   const [indices, setIndices] = useState<IndicesType>({ background: 0, skin: 0, base: 0, eyes: 0, lips: 0, hair: 0, clothes: 0, hat: 0, accessories: 0, extra: 0 });
 
+  const client = new NFTStorage({ token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDdDZGNFODk1REJGZTRjMTFBOUY1MzU1NDg2QTc2N0U0YWNFOTA0ODUiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY5NzkxOTQ2ODE3OCwibmFtZSI6InRlc3QifQ.D6DCYG3C6AKsptCHzK1w_oaOeC7_fpWSgwgYHO0Sm1w' });
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -74,6 +77,31 @@ const DressUp: React.FC = () => {
     }));
   };
 
+  const uploadToIPFS = async () => {
+    const canvas = canvasRef.current;
+    if (!canvas) {
+      console.error('Canvas not found');
+      return;
+    }
+
+    canvas.toBlob(async (blob) => {
+      try {
+        const metadata = await client.store({
+          name: 'GeneratedNFT',
+          description: 'NFT created using DressUp component',
+          image: new File([blob], 'generatedNFT.png', {
+            type: 'image/png',
+          }),
+        });
+        
+        console.log('Uploaded to IPFS:', metadata);
+        // Save metadata.url somewhere or notify the user
+      } catch (error) {
+        console.error('Error uploading to IPFS:', error);
+      }
+    });
+  };
+
   return (
     <>
     <div className='flex flex-col justify-center items-center'>
@@ -87,6 +115,11 @@ const DressUp: React.FC = () => {
         <div>
           <NFTMint {...(Object.fromEntries(Object.entries(indices).filter(([key]) => key !== 'base')) as MintAttributes)} />
         </div>
+        <button 
+          className="px-7 uppercase p-4 bg-blue-600 text-white font-extrabold hover:bg-blue-700 border border-blue-500 transition duration-300"
+          onClick={uploadToIPFS}>
+            🚀 Upload to IPFS 🚀
+        </button>
 
       </div>
 
