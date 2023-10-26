@@ -30,7 +30,7 @@ pub mod collection {
         #[storage_field]
         payable_mint: types::Data,
     }
-    
+
     /// Event emitted when a token transfer occurs.
     #[ink(event)]
     pub struct Transfer {
@@ -127,7 +127,7 @@ pub mod collection {
 
             // Set the max supply for the tokens.
             instance.payable_mint.max_supply = max_supply;
-            
+
             // Set the price for minting a token.
             instance.payable_mint.price_per_mint = price_per_mint;
 
@@ -136,7 +136,7 @@ pub mod collection {
 
             // Set the maximum amount of tokens that can be minted at once.
             instance.payable_mint.max_amount = 1;
-    
+
             // Return the initialized instance of the Collection contract.
             instance
         }
@@ -148,11 +148,11 @@ pub mod collection {
         use crate::collection::Collection;
         use ink::env::test;
         use openbrush::contracts::traits::errors::PSP34Error::*;
-        use payable_mint_pkg::impls::payable_mint::types::NFTAttributes;
         use openbrush::{
             contracts::psp34::{extensions::enumerable::*, extensions::metadata, PSP34Impl},
             traits::{AccountId, Balance, String},
         };
+        use payable_mint_pkg::impls::payable_mint::types::NFTAttributes;
         //use payable_mint_pkg::impls::payable_mint;
         use payable_mint_pkg::impls::payable_mint::payable_mint::PayableMintImpl;
         //use payable_mint_pkg::impls::payable_mint::types;
@@ -215,7 +215,21 @@ pub mod collection {
 
             assert_eq!(PSP34Impl::total_supply(&collection), 0);
             test::set_value_transferred::<ink::env::DefaultEnvironment>(PRICE);
-            assert!(collection.mint(accounts.bob, 1, 1, 1, 1, 1, 1, 1, 1, 1).is_ok());
+            assert!(collection
+                .mint(
+                    accounts.bob,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    "ipfs_string".to_string()
+                )
+                .is_ok());
             assert_eq!(PSP34Impl::total_supply(&collection), 1);
             assert_eq!(
                 PSP34Impl::owner_of(&collection, Id::U64(1)),
@@ -278,5 +292,4 @@ pub mod collection {
             ink::env::test::set_caller::<ink::env::DefaultEnvironment>(sender);
         }
     }
-
 }

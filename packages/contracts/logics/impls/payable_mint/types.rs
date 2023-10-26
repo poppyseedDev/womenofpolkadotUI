@@ -1,5 +1,8 @@
 use ink::storage::Mapping;
-use openbrush::{traits::Balance, contracts::psp34::Id};
+use openbrush::{
+    contracts::psp34::Id,
+    traits::{Balance, String},
+};
 
 /// NFT attributes structure.
 #[derive(Clone, Default, Debug, scale::Encode, scale::Decode)]
@@ -28,4 +31,5 @@ pub struct Data {
     pub collection_id: u32,
     pub max_amount: u64,
     pub token_attributes: Mapping<Id, NFTAttributes>,
+    pub ipfs_string: Mapping<Id, String>,
 }
