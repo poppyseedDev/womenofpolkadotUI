@@ -24,7 +24,7 @@ pub trait PayableMintImpl:
 {
     #[ink(message, payable)]
     fn mint(
-        &mut self, 
+        &mut self,
         to: AccountId,
         background: u8,
         skin: u8,
@@ -35,6 +35,7 @@ pub trait PayableMintImpl:
         hat: u8,
         accessories: u8,
         extra: u8,
+        ipfs_str: String,
     ) -> Result<(), PSP34Error> {
         self.check_value(Self::env().transferred_value(), 1)?;
         self.check_amount(1)?;
@@ -48,7 +49,7 @@ pub trait PayableMintImpl:
             clothes,
             hat,
             accessories,
-            extra
+            extra,
         };
 
         let next_to_mint = self.data::<Data>().last_token_id + 1; // first mint id is 1
@@ -57,8 +58,14 @@ pub trait PayableMintImpl:
         self.data::<Data>().last_token_id += 1;
 
         // Store the attributes for the minted token.
-        self.data::<Data>().token_attributes.insert(&Id::U64(next_to_mint), &attrs);
+        self.data::<Data>()
+            .token_attributes
+            .insert(&Id::U64(next_to_mint), &attrs);
 
+        // Store the ipfs string for the minted token.
+        self.data::<Data>()
+            .ipfs_string
+            .insert(&Id::U64(next_to_mint), &ipfs_str);
 
         Ok(())
     }
@@ -106,7 +113,9 @@ pub trait PayableMintImpl:
             PSP34Impl::collection_id(self),
             String::from("baseUri"),
         );
-        let token_uri = base_uri.unwrap() + &token_id.to_string() + &String::from(".json");
+        let ipfs_string = self.data::<Data>().ipfs_string.get(&Id::U64(token_id));
+
+        let token_uri = base_uri.unwrap() + &ipfs_string.unwrap() + &String::from(".json");
         Ok(token_uri)
     }
 
