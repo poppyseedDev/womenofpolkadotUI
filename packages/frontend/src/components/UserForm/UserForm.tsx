@@ -5,7 +5,7 @@ import { FC, useMemo } from 'react'
 import { useState } from 'react';
 
 export interface AccountNameProps {
-    activeAccount: String
+    activeAccount: string
   }
 
 export const UserForm: FC<AccountNameProps> = ({ activeAccount, ...rest }) => {
