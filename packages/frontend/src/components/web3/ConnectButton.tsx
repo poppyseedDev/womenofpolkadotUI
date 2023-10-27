@@ -19,6 +19,7 @@ import { toast } from 'react-hot-toast'
 import { AiOutlineCheckCircle, AiOutlineDisconnect } from 'react-icons/ai'
 import { FiChevronDown, FiExternalLink } from 'react-icons/fi'
 import { AccountName } from './AccountName'  // Assuming AccountName is in the same directory
+import UserForm from '@components/UserForm/UserForm'
 
 export interface ConnectButtonProps {}
 export const ConnectButton: FC<ConnectButtonProps> = () => {
@@ -46,6 +47,7 @@ export const ConnectButton: FC<ConnectButtonProps> = () => {
   const isSSR = useIsSSR()
   const [openConnect, setOpenConnect] = useState(false)
   const [openChooseAccount, setOpenChooseAccount] = useState(false)
+  const [openChooseForm, setOpenChooseForm] = useState(false)
   const [chosenWallet, setChosenWallet] = useState<SubstrateWallet | null>(null);
 
 return (
@@ -102,7 +104,7 @@ return (
   )}
   {!!activeAccount && (
     // Account Menu & Disconnect Button
-    <div className=" space-y-4">
+    <div className="  flex flex-row justify-normal space-x-6">
       <div className="flex items-center ">
         {/* Account Balance */}
         {balanceFormatted !== undefined && (
@@ -177,6 +179,24 @@ return (
             </div>
 
           </>
+        </WalletModal>
+          
+      
+      <div className="flex items-center ">
+        {/* User Form */}
+        <button
+          className="flex flex-col items-start p-4 border border-black  bg-white dark:bg-gray-900 shadow hover:bg-gray-100 dark:hover:bg-gray-800"
+          onClick={() => setOpenChooseForm(true)} 
+          >
+          Verify Yourself
+        </button>
+      </div>
+        <WalletModal isOpen={openChooseForm} onClose={() => setOpenChooseForm(false)}  title="Get Verified">
+          <div className='p-2'>
+
+          <UserForm activeAccount={activeAccount.address} />
+          </div>
+
         </WalletModal>
 
 

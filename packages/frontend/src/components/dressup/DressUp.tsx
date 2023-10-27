@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { IndicesType, ImagePathType } from './types';
 import ImageSwitcher from './ImageSwitcher';
 import { MintAttributes, NFTMint } from '@components/web3/CollectionContractInteractions';
+import UserForm from '@components/UserForm/UserForm';
 // Import nft.storage library
 import { NFTStorage, File } from 'nft.storage';
 
@@ -85,6 +86,11 @@ const DressUp: React.FC = () => {
     }
 
     canvas.toBlob(async (blob) => {
+      if (!blob) {
+        console.error('Blob is null');
+        return;
+      }
+
       try {
         const metadata = await client.store({
           name: 'GeneratedNFT',
@@ -115,11 +121,13 @@ const DressUp: React.FC = () => {
         <div>
           <NFTMint {...(Object.fromEntries(Object.entries(indices).filter(([key]) => key !== 'base')) as MintAttributes)} />
         </div>
+        {/* Hide for now 
         <button 
           className="px-7 uppercase p-4 bg-blue-600 text-white font-extrabold hover:bg-blue-700 border border-blue-500 transition duration-300"
           onClick={uploadToIPFS}>
             🚀 Upload to IPFS 🚀
         </button>
+        */}
 
       </div>
 
