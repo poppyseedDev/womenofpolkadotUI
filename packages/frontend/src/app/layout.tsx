@@ -15,9 +15,10 @@ import './globals.css'
 import { Pixelify_Sans } from 'next/font/google'
 
 //👇 Configure our font object
-const openSans = Pixelify_Sans({
+const pixelSans = Pixelify_Sans({
   subsets: ['latin'],
   display: 'swap',
+  variable: '--font-roboto-mono',
 })
 
 export default function RootLayout({
@@ -26,7 +27,7 @@ export default function RootLayout({
     children: React.ReactNode
   }) {
   return (
-    <html lang="en" className={openSans.className}>
+    <html lang="en" className={pixelSans.variable}>
       <body className='bg-white text-black dark:bg-black dark:text-white'>
         <UseInkathonProvider
             appName="WomenOfPolkadot" // TODO
