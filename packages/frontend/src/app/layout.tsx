@@ -18,7 +18,7 @@ import { Pixelify_Sans } from 'next/font/google'
 const pixelSans = Pixelify_Sans({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-roboto-mono',
+  variable: '--font-pixel-sans',
 })
 
 export default function RootLayout({

@@ -5,7 +5,7 @@ const HeroSection: React.FC = () => {
     <div className="relative w-full">
       <div className="hero bg-[url('/brand/heroimg.png')] bg-cover bg-no-repeat bg-center h-screen text-white">
         <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="text-center p-10" style={{ fontFamily: "'Pixelify Sans', sans-serif" }}>
+          <div className="text-center pt-28 p-10 max-w-4xl" style={{ fontFamily: "'Pixelify Sans', sans-serif" }}>
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Empowering Women in the Polkadot Ecosystem</h1>
             <p className="text-sm sm:text-base md:text-lg mb-6">Join our monthly meetings and be a part of the change.</p>
             <div className="flex justify-center">

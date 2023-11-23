@@ -8,10 +8,9 @@ const Header: React.FC = () => {
         <h1 className="font-bold text-xl">Women of Polkadot</h1>
         <div className='space-x-4'>
           <Link href="/">Home</Link>
-          <Link href="/about">About Us</Link>
-          <Link href="/events">Events</Link>
-          <Link href="/join">Join Us</Link>
-          <Link href="/support">Support Us</Link>
+          <Link href="/events">Mint NFT</Link>
+          <Link href="/join">Blog</Link>
+          <Link href="/support">Connect Wallet</Link>
         </div>
       </nav>
     </header>
