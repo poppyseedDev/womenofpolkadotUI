@@ -1,13 +1,24 @@
-import UserForm from '@/components/UserForm/UserForm';
-import { AccountName } from '@components/web3/AccountName';
+'use client'
 
-export default function Home() {
+import React from 'react';
+import Header from './Header';
+import HeroSection from './HeroSection';
+import AboutSection from './AboutSection';
+import SupportSection from './SupportSection';
+import Footer from './Footer';
+
+
+
+const Home: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-      <div className="p-8 flex bg-white dark:bg-black rounded shadow-md">
-        <h1 className="text-xl mb-4">User Details Form</h1>
-        
-      </div>
-    </div>
+    <>
+      <Header />
+      <HeroSection />
+      <AboutSection />
+      <SupportSection />
+      <Footer />
+    </>
   );
-}
+};
+
+export default Home;
