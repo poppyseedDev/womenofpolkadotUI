@@ -13,6 +13,8 @@ import './globals.css'
 
 //👇 Import Open Sans font
 import { Pixelify_Sans } from 'next/font/google'
+import Header from './Header';
+import Footer from './Footer';
 
 //👇 Configure our font object
 const pixelSans = Pixelify_Sans({
@@ -35,7 +37,10 @@ export default function RootLayout({
             defaultChain={env.defaultChain}
             deployments={getDeployments()}
         >
+          <Header />
+          
           {children}
+          <Footer />
         </UseInkathonProvider>
       </body>
     </html>
