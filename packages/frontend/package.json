@@ -13,6 +13,9 @@
     "lint:fix": "prettier . --write && pnpm eslint --fix",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
+  "engines": {
+    "node": "16.14.0"
+  },
   "dependencies": {
     "@azns/resolver-core": "^1.6.0",
     "@azns/resolver-react": "^1.6.0",

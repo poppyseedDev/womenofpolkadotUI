@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -61,6 +65,9 @@ importers:
       '@inkathon/contracts':
         specifier: workspace:*
         version: link:../contracts
+      '@inkathon/frontend':
+        specifier: 'link:'
+        version: 'link:'
       '@polkadot/api':
         specifier: ^10.9.1
         version: 10.9.1
@@ -1029,6 +1036,7 @@ packages:
 
   /@substrate/connect-extension-protocol@1.0.1:
     resolution: {integrity: sha512-161JhCC1csjH3GE5mPLEd7HbWtwNSPJBg3p1Ksz9SFlTzj/bgEwudiRN2y5i0MoLGCIJRYKyKGMxVnd29PzNjg==}
+    requiresBuild: true
     optional: true
 
   /@substrate/connect@0.7.26:
@@ -2702,6 +2710,7 @@ packages:
 
   /eventemitter3@4.0.7:
     resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
+    requiresBuild: true
     optional: true
 
   /eventemitter3@5.0.1:
@@ -4312,6 +4321,7 @@ packages:
 
   /pako@2.1.0:
     resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
+    requiresBuild: true
     optional: true
 
   /parent-module@1.0.1:
@@ -4948,6 +4958,7 @@ packages:
 
   /smoldot@1.0.4:
     resolution: {integrity: sha512-N3TazI1C4GGrseFH/piWyZCCCRJTRx2QhDfrUKRT4SzILlW5m8ayZ3QTKICcz1C/536T9cbHHJyP7afxI6Mi1A==}
+    requiresBuild: true
     dependencies:
       pako: 2.1.0
       ws: 8.14.2
