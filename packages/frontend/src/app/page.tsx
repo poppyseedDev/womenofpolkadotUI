@@ -11,11 +11,11 @@ import Footer from './Footer';
 
 const Home: React.FC = () => {
   return (
-    <>
+    <div className='font-pixel'>
       <HeroSection />
       <AboutSection />
       <SupportSection />
-    </>
+    </div>
   );
 };
 
