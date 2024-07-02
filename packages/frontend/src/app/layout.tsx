@@ -2,8 +2,8 @@
 
 import './globals.css'
 import 'tailwindcss/tailwind.css';
-import { env } from '@config/environment'
-import { getDeployments } from '@deployments/deployments'
+// import { env } from '@config/environment'
+// import { getDeployments } from '@deployments/deployments'
 import { UseInkathonProvider } from '@scio-labs/use-inkathon'
 
 
@@ -31,17 +31,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={pixelSans.variable}>
       <body className='bg-white font-pixel text-black dark:bg-black dark:text-white'>
-        <UseInkathonProvider
+        {/* <UseInkathonProvider
             appName="WomenOfPolkadot" // TODO
             connectOnInit={false}
             defaultChain={env.defaultChain}
             deployments={getDeployments()}
-        >
+        > */}
           <Header />
           
           {children}
           <Footer />
-        </UseInkathonProvider>
+        {/* </UseInkathonProvider> */}
       </body>
     </html>
   )
