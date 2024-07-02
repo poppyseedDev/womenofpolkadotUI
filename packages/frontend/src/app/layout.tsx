@@ -30,10 +30,10 @@ export default function RootLayout({
   }) {
   return (
     <html lang="en" className={pixelSans.variable}>
-      <body className='bg-white text-black dark:bg-black dark:text-white'>
+      <body className='bg-white font-pixel text-black dark:bg-black dark:text-white'>
         <UseInkathonProvider
             appName="WomenOfPolkadot" // TODO
-            connectOnInit={true}
+            connectOnInit={false}
             defaultChain={env.defaultChain}
             deployments={getDeployments()}
         >

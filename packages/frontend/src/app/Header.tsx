@@ -26,7 +26,7 @@ const Header: React.FC = () => {
   return (
     <header className={`fixed z-10 top-0 w-full flex justify-between p-4 text-white shadow-md transition-all duration-300 ease-in-out ${isScrolled ? 'bg-black' : 'bg-transparent'}`}>
       <nav className="container mx-auto flex justify-between items-center">
-        <h1 className="font-bold text-xl" style={{ fontFamily: "'Pixelify Sans', sans-serif" }}>Women of Polkadot</h1>
+        <h1 className="font-bold text-xl">Women of Polkadot</h1>
         <div className="md:hidden">
           <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {/* Hamburger icon */}
