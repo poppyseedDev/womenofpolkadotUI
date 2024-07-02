@@ -35,9 +35,9 @@ const Header: React.FC = () => {
         </div>
         <div className={`absolute top-14 right-0 ${isScrolled ? 'bg-black' : 'bg-transparent'} shadow-md rounded-lg md:shadow-none z-20 md:relative md:visible md:top-0 md:right-0 ${isMenuOpen ? 'flex' : 'invisible'} flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 p-4 md:p-0`}>
           <Link href="/" className="text-white hover:text-blue-500">Home</Link>
-          <Link href="/collection" className="hover:text-blue-500">Mint NFT</Link>
+          {/* <Link href="/collection" className="hover:text-blue-500">Mint NFT</Link> */}
           <Link href="https://medium.com/women-of-polkadot" className="hover:text-blue-500">Blog</Link>
-          <a href="#" className="hover:text-blue-500">Connect Wallet</a>
+          {/* <a href="#" className="hover:text-blue-500">Connect Wallet</a> */}
         </div>
       </nav>
     </header>
