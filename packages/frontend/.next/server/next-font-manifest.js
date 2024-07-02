@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/aurora/Desktop/Aurora/womenofpolkadot/womenofpolkadotUI/packages/frontend/src/app/layout":["static/media/0b3ba4bd860abcf8.p.woff2"]},"appUsingSizeAdjust":false,"pagesUsingSizeAdjust":false}';
