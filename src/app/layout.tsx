@@ -2,13 +2,6 @@
 
 import './globals.css'
 import 'tailwindcss/tailwind.css';
-// import { env } from '@config/environment'
-// import { getDeployments } from '@deployments/deployments'
-import { UseInkathonProvider } from '@scio-labs/use-inkathon'
-
-
-// src/app/layout.js
-
 import './globals.css'
 
 //👇 Import Open Sans font
